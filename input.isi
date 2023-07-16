@@ -1,0 +1,9 @@
+programa
+    leia(a).
+    leia(b).
+
+    c := 1.2.
+
+    escreva("valor de a").
+    escreva(a).
+fimprog.
