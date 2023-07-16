@@ -1,6 +1,6 @@
 programa
 
-    declare a, b, c, d.
+    declare a, b, c, d, nome, idade, velocidade.
     escreva("Programa Teste").
     escreva("Digite A").
     leia(a).
@@ -12,6 +12,9 @@ programa
     } senao {
         c := a - b.
     }
+    nome := "John Doe".
+    idade := 20.
+    velocidade := 21.31.
 
     escreva("C e igual a ").
     escreva(c).

@@ -667,6 +667,7 @@ public class IsiLangParser extends Parser {
 	public static class TermoContext extends ParserRuleContext {
 		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
 		public TerminalNode NUMBER() { return getToken(IsiLangParser.NUMBER, 0); }
+		public TerminalNode TEXT() { return getToken(IsiLangParser.TEXT, 0); }
 		public TermoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -690,7 +691,7 @@ public class IsiLangParser extends Parser {
 			{
 			setState(89);
 			_la = _input.LA(1);
-			if ( !(_la==ID || _la==NUMBER) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1835008L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -728,7 +729,7 @@ public class IsiLangParser extends Parser {
 		"\u0003\u0007P\b\u0007\u0001\b\u0001\b\u0001\b\u0005\bU\b\b\n\b\f\bX\t"+
 		"\b\u0001\t\u0001\t\u0001\t\u0000\u0000\n\u0000\u0002\u0004\u0006\b\n\f"+
 		"\u000e\u0010\u0012\u0000\u0002\u0002\u0000\u0012\u0012\u0014\u0014\u0001"+
-		"\u0000\u0012\u0013X\u0000\u0014\u0001\u0000\u0000\u0000\u0002\u0019\u0001"+
+		"\u0000\u0012\u0014X\u0000\u0014\u0001\u0000\u0000\u0000\u0002\u0019\u0001"+
 		"\u0000\u0000\u0000\u0004%\u0001\u0000\u0000\u0000\u0006-\u0001\u0000\u0000"+
 		"\u0000\b/\u0001\u0000\u0000\u0000\n5\u0001\u0000\u0000\u0000\f;\u0001"+
 		"\u0000\u0000\u0000\u000e@\u0001\u0000\u0000\u0000\u0010Q\u0001\u0000\u0000"+

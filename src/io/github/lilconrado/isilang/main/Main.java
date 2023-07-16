@@ -15,7 +15,7 @@ public class Main {
 
             var parser = new IsiLangParser(tokenStream);
 
-            parser.prog();
+            var a = parser.prog();
 
             System.out.println("Compilation Successful");
         } catch (Exception ex) {
