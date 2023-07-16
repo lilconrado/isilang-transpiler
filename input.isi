@@ -7,9 +7,9 @@ programa
     escreva("Digite B").
     leia(b).
 
-    if (a < b) {
+    se (a < b) entao {
         c := a + b.
-    } else {
+    } senao {
         c := a - b.
     }
 
