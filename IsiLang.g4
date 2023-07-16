@@ -1,16 +1,18 @@
 grammar IsiLang;
 
-prog: 'programa' bloco 'fimprog.' ;
+prog: 'programa' declara bloco 'fimprog.' ;
 
-bloco: (cmd)+ ;
+declara: 'declare' ID (VIR ID)* PF ;
+
+bloco: (cmd PF)+ ;
 
 cmd : cmdLeitura | cmdEscrita | cmdExpr ;
 
-cmdLeitura: 'leia' AP ID FP PF ;
+cmdLeitura: 'leia' AP ID FP ;
 
-cmdEscrita: 'escreva' AP (ID | TEXT) FP PF ;
+cmdEscrita: 'escreva' AP (ID | TEXT) FP ;
 
-cmdExpr: ID ATTR expr PF;
+cmdExpr: ID ATTR expr ;
 
 expr: termo (OP termo)* ;
 
@@ -21,6 +23,8 @@ AP: '(' ;
 FP: ')' ;
 
 PF: '.' ;
+
+VIR: ',' ;
 
 ATTR: ':=' ;
 
