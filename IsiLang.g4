@@ -18,7 +18,7 @@ cmdIf: 'se' AP expr OP_REL expr FP 'entao' AC bloco FC ('senao' AC bloco FC)? ;
 
 expr: termo (OP termo)* ;
 
-termo: ID | NUMBER;
+termo: ID | NUMBER | TEXT;
 
 AP: '(' ;
 
@@ -38,7 +38,7 @@ OP: '+' | '-' | '*' | '/' ;
 
 OP_REL: '<' | '>' | '<=' | '>=' | '!=' | '==' ;
 
-ID: [a-z] ([a-z][A-Z]|[0-9])* ;
+ID: [a-z] ([a-z]|[A-Z]|[0-9])* ;
 
 NUMBER: [0-9]+ ('.' [0-9]+)? ;
 
