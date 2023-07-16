@@ -1,3 +1,8 @@
+Para gerar o Parse execute o comando
+```
+antlr4 ./IsiLang.g4 -o src/io/github/lilconrado/isilang/parser -package io.github.lilconrado.isilang.parser
+```
+
 ## Itens Obrigatórios 
 || Item | Feito | 
 | --  | -- |  --- |
