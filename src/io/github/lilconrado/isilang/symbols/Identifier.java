@@ -24,8 +24,18 @@ public class Identifier {
         return type;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setType(String value) {
+        if (this.type != Type.UNDEFINED) {
+            return;
+        }
+
+        if (value.charAt(0) == '"') {
+            this.type = Type.STRING;
+        } else if (value.matches("[+-]?[0-9]*")) {
+            this.type = Type.INTEGER;
+        } else if (value.matches("[+-]?[0-9]*\\.[0-9]+")) {
+            this.type = Type.REAL;
+        }
     }
 
     public Object getValue() {
@@ -39,9 +49,5 @@ public class Identifier {
     public Identifier(String name) {
         this.name = name;
         this.type = Type.UNDEFINED;
-    }
-
-    public static Type queryType(String value) {
-        return Type.INTEGER;
     }
 }

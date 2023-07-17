@@ -21,6 +21,11 @@ grammar IsiLang;
             throw new SemanticException("Variable " + name + " not declared");
         }
     }
+
+    public Identifier getId(String name) {
+        verificaId(name);
+        return _symbolTable.get(name);
+    }
 }
 
 prog: 'programa' (declara)? bloco 'fimprog.' ;
@@ -35,8 +40,6 @@ identifier: ID {
     } else {
         throw new SemanticException("Variable " + _varName + " already declared");
     }
-
-    System.out.println(_identifier);
 } ;
 
 declara: 'declare' identifier (VIR identifier)* PF ;
@@ -54,8 +57,7 @@ cmdEscrita: 'escreva' AP (ID {
 } | TEXT) FP PF ;
 
 cmdExpr: ID {
-    verificaId(_input.LT(-1).getText());
-    System.out.println("ID = " + _input.LT(-1).getText());
+    _identifier = getId(_input.LT(-1).getText());
 } ATTR expr PF;
 
 cmdIf: 'se' AP expr OP_REL expr FP AC bloco FC ('senao' AC bloco FC)? ;
@@ -68,7 +70,13 @@ expr: termo (OP termo)* ;
 
 termo: ID {
     verificaId(_input.LT(-1).getText());
-} | NUMBER | TEXT ;
+} | NUMBER {
+    _identifier.setType(_input.LT(-1).getText());
+    System.out.println(_identifier);
+} | TEXT {
+    _identifier.setType(_input.LT(-1).getText());
+    System.out.println(_identifier);
+} ;
 
 AP: '(' ;
 
