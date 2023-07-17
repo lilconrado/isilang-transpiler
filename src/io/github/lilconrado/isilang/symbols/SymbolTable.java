@@ -21,8 +21,8 @@ public class SymbolTable {
         this.symbols = symbols;
     }
 
-    public void add(String key, Identifier value) {
-        this.symbols.put(key, value);
+    public void add(Identifier value) {
+        this.symbols.put(value.getName(), value);
     }
 
     public boolean exists(String key) {

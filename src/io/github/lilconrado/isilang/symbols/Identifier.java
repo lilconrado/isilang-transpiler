@@ -3,7 +3,7 @@ package io.github.lilconrado.isilang.symbols;
 public class Identifier {
     protected String name;
 
-    protected Types type;
+    protected Type type;
 
     protected Object value;
 
@@ -20,11 +20,11 @@ public class Identifier {
         this.name = name;
     }
 
-    public Types getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(Types type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
@@ -36,8 +36,12 @@ public class Identifier {
         this.value = value;
     }
 
-    public Identifier(String name, Types type) {
+    public Identifier(String name) {
         this.name = name;
-        this.type = type;
+        this.type = Type.UNDEFINED;
+    }
+
+    public static Type queryType(String value) {
+        return Type.INTEGER;
     }
 }

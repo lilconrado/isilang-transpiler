@@ -1,6 +1,7 @@
 package io.github.lilconrado.isilang.symbols;
 
-public enum Types {
+public enum Type {
+    UNDEFINED,
     INTEGER,
     REAL,
     STRING
