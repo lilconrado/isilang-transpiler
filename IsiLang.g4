@@ -15,6 +15,12 @@ grammar IsiLang;
     private String _varValue;
     private SymbolTable _symbolTable = new SymbolTable();
     private Identifier _identifier;
+
+    public void verificaId(String name) {
+        if (!_symbolTable.exists(name)) {
+            throw new SemanticException("Variable " + name + " not declared");
+        }
+    }
 }
 
 prog: 'programa' (declara)? bloco 'fimprog.' ;
@@ -39,11 +45,16 @@ bloco: (cmd)+ ;
 
 cmd : cmdLeitura | cmdEscrita | cmdExpr | cmdIf | cmdWhile | cmdDoWhile ;
 
-cmdLeitura: 'leia' AP ID FP PF ;
+cmdLeitura: 'leia' AP ID {
+    verificaId(_input.LT(-1).getText());
+} FP PF ;
 
-cmdEscrita: 'escreva' AP (ID | TEXT) FP PF ;
+cmdEscrita: 'escreva' AP (ID {
+    verificaId(_input.LT(-1).getText());
+} | TEXT) FP PF ;
 
 cmdExpr: ID {
+    verificaId(_input.LT(-1).getText());
     System.out.println("ID = " + _input.LT(-1).getText());
 } ATTR expr PF;
 
@@ -55,7 +66,9 @@ cmdDoWhile: 'faca' AC bloco FC 'enquanto' AP expr OP_REL expr FP ;
 
 expr: termo (OP termo)* ;
 
-termo: ID | NUMBER | TEXT ;
+termo: ID {
+    verificaId(_input.LT(-1).getText());
+} | NUMBER | TEXT ;
 
 AP: '(' ;
 
