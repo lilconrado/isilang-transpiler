@@ -50,4 +50,9 @@ public class Identifier {
         this.name = name;
         this.type = Type.UNDEFINED;
     }
+
+    public Identifier(String name, Type type) {
+        this.name = name;
+        this.type = type;
+    }
 }

@@ -28,21 +28,27 @@ grammar IsiLang;
     }
 }
 
-prog: 'programa' (declara)? bloco 'fimprog.' ;
+prog: 'programa' (declara)* bloco 'fimprog.' ;
 
 identifier: ID {
     _varName = _input.LT(-1).getText();
     _varValue = null;
 
     if (!_symbolTable.exists(_varName)) {
-        _identifier = new Identifier(_varName);
+        _identifier = new Identifier(_varName, _type);
+        System.out.println(_identifier);
         _symbolTable.add(_identifier);
     } else {
         throw new SemanticException("Variable " + _varName + " already declared");
     }
 } ;
 
-declara: 'declare' identifier (VIR identifier)* PF ;
+declara: tipo identifier (VIR identifier)* PF ;
+
+tipo : 'inteiro' { _type = Type.INTEGER; }
+     | 'real' { _type = Type.REAL; }
+     | 'texto' { _type = Type.STRING; } ;
+
 
 bloco: (cmd)+ ;
 
@@ -72,10 +78,8 @@ termo: ID {
     verificaId(_input.LT(-1).getText());
 } | NUMBER {
     _identifier.setType(_input.LT(-1).getText());
-    System.out.println(_identifier);
 } | TEXT {
     _identifier.setType(_input.LT(-1).getText());
-    System.out.println(_identifier);
 } ;
 
 AP: '(' ;

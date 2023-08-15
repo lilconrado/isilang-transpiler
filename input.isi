@@ -1,6 +1,12 @@
 programa
     // teste comentario
-    declare a, b, c, d, nome, idade, velocidade.
+    //declare a, b, c, d, nome, idade, velocidade.
+
+    inteiro a, b, c, d.
+    texto nome.
+    inteiro idade.
+    real velocidade.
+
     escreva("Programa Teste").
     escreva("Digite A").
     leia(a).
