@@ -7,6 +7,7 @@ package io.github.lilconrado.isilang.parser;
     import io.github.lilconrado.isilang.symbols.SymbolTable;
     import io.github.lilconrado.isilang.symbols.Type;
     import io.github.lilconrado.isilang.exceptions.SemanticException;
+    import io.github.lilconrado.isilang.ast.Program;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 

@@ -7,6 +7,7 @@ package io.github.lilconrado.isilang.parser;
     import io.github.lilconrado.isilang.symbols.SymbolTable;
     import io.github.lilconrado.isilang.symbols.Type;
     import io.github.lilconrado.isilang.exceptions.SemanticException;
+    import io.github.lilconrado.isilang.ast.Program;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -103,6 +104,7 @@ public class IsiLangLexer extends Lexer {
 	    private String _varValue;
 	    private SymbolTable _symbolTable = new SymbolTable();
 	    private Identifier _identifier;
+	    private Program  program = new Program();
 
 	    public void verificaId(String name) {
 	        if (!_symbolTable.exists(name)) {
