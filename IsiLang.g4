@@ -51,7 +51,6 @@ tipo : 'inteiro' { _type = Type.INTEGER; }
      | 'real' { _type = Type.REAL; }
      | 'texto' { _type = Type.STRING; } ;
 
-
 bloco: (cmd)+ ;
 
 cmd : cmdLeitura | cmdEscrita | cmdExpr | cmdIf | cmdWhile | cmdDoWhile ;

@@ -1,7 +1,5 @@
 programa
     // teste comentario
-    //declare a, b, c, d, nome, idade, velocidade.
-
     inteiro a, b, c, d.
     texto nome.
     inteiro idade.
@@ -35,13 +33,13 @@ programa
         a := a + 1.
     }
 
+    /*
+    teste comentario
+    */
+
     faca {
         escreva("a eh menor que b").
         a := a + 1.
     } enquanto (a < b)
-
-    /*
-    teste comentario
-    */
 
 fimprog.
