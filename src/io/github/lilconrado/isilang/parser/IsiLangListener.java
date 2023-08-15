@@ -1,5 +1,13 @@
 // Generated from ./IsiLang.g4 by ANTLR 4.13.0
 package io.github.lilconrado.isilang.parser;
+
+    import java.util.ArrayList;
+    import java.lang.String;
+    import io.github.lilconrado.isilang.symbols.Identifier;
+    import io.github.lilconrado.isilang.symbols.SymbolTable;
+    import io.github.lilconrado.isilang.symbols.Type;
+    import io.github.lilconrado.isilang.exceptions.SemanticException;
+
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -17,6 +25,16 @@ public interface IsiLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProg(IsiLangParser.ProgContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link IsiLangParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier(IsiLangParser.IdentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link IsiLangParser#identifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier(IsiLangParser.IdentifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link IsiLangParser#declara}.
 	 * @param ctx the parse tree

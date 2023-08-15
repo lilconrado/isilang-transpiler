@@ -1,6 +1,14 @@
 // Generated from ./IsiLang.g4 by ANTLR 4.13.0
 package io.github.lilconrado.isilang.parser;
 
+    import java.util.ArrayList;
+    import java.lang.String;
+    import io.github.lilconrado.isilang.symbols.Identifier;
+    import io.github.lilconrado.isilang.symbols.SymbolTable;
+    import io.github.lilconrado.isilang.symbols.Type;
+    import io.github.lilconrado.isilang.exceptions.SemanticException;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -24,6 +32,18 @@ public class IsiLangBaseListener implements IsiLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitProg(IsiLangParser.ProgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIdentifier(IsiLangParser.IdentifierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIdentifier(IsiLangParser.IdentifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

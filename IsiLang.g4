@@ -78,8 +78,6 @@ termo: ID {
     System.out.println(_identifier);
 } ;
 
-comment: (CS bloco CE) | CL termo;
-
 AP: '(' ;
 
 FP: ')' ;
@@ -108,8 +106,12 @@ TEXT: '"' ([a-z]|[A-Z]|[0-9]|' '|'\t'|'!'|'-'|'='|'<'|'>')* '"';
 
 BLANK: (' '| '\t' | '\n' | '\r') -> skip;
 
-CS: '*/';
+CS: '/*';
 
-CE: '/*';
+CE: '*/';
 
 CL: '//';
+
+SIGLE_COMMENT: CL ~( '\r' | '\n' )* -> skip;
+
+MULTI_COMMENT: CS (.)*? CE -> skip;
