@@ -1,22 +1,22 @@
 package io.github.lilconrado.isilang.expressions;
 
 public class RealExpression extends AbstractExpression {
-    public RealExpression(float value) {
+    public RealExpression(String text) {
        super();
-       this.value = value;
+       this.value = Double.parseDouble(text);
     }
 
     public RealExpression() {
         super();
     }
 
-    private float value;
+    private double value;
 
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setValue(double value) {
         this.value = value;
     }
 

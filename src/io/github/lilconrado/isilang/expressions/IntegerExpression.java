@@ -1,9 +1,9 @@
 package io.github.lilconrado.isilang.expressions;
 
 public class IntegerExpression extends AbstractExpression {
-    public IntegerExpression(int value) {
+    public IntegerExpression(String text) {
        super();
-       this.value = value;
+       this.value = Integer.parseInt(text);
     }
 
     public IntegerExpression() {
