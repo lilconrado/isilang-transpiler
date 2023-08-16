@@ -16,7 +16,10 @@ public class Main {
 
             var parser = new IsiLangParser(tokenStream);
 
+            parser.init();
             var a = parser.prog();
+            parser.exibirIds();
+            parser.generateObjectCode();
 
             System.out.println("Compilation Successful");
         } catch (SemanticException ex) {

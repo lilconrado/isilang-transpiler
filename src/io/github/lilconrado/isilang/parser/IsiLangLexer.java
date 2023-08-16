@@ -2,12 +2,13 @@
 package io.github.lilconrado.isilang.parser;
 
     import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Stack;
     import java.lang.String;
-    import io.github.lilconrado.isilang.symbols.Identifier;
-    import io.github.lilconrado.isilang.symbols.SymbolTable;
-    import io.github.lilconrado.isilang.symbols.Type;
+    import io.github.lilconrado.isilang.symbols.*;
     import io.github.lilconrado.isilang.exceptions.SemanticException;
-    import io.github.lilconrado.isilang.ast.Program;
+    import io.github.lilconrado.isilang.ast.*;
+    import io.github.lilconrado.isilang.expressions.*;
 
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -105,6 +106,16 @@ public class IsiLangLexer extends Lexer {
 	    private SymbolTable _symbolTable = new SymbolTable();
 	    private Identifier _identifier;
 	    private Program  program = new Program();
+	    private Stack<List<AbstractCommand>> stack = new Stack<List<AbstractCommand>>();
+
+	    public void init() {
+	        program.setSymbolTable(_symbolTable);
+	        stack.push(new ArrayList<AbstractCommand>());
+	    }
+
+	    public void exibirIds(){
+	        _symbolTable.getSymbols().values().stream().forEach((id)->System.out.println(id));
+	    }
 
 	    public void verificaId(String name) {
 	        if (!_symbolTable.exists(name)) {
@@ -115,6 +126,10 @@ public class IsiLangLexer extends Lexer {
 	    public Identifier getId(String name) {
 	        verificaId(name);
 	        return _symbolTable.get(name);
+	    }
+
+	    public void generateObjectCode(){
+	        program.generateTarget();
 	    }
 
 

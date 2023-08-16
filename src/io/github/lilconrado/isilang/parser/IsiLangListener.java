@@ -2,12 +2,13 @@
 package io.github.lilconrado.isilang.parser;
 
     import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Stack;
     import java.lang.String;
-    import io.github.lilconrado.isilang.symbols.Identifier;
-    import io.github.lilconrado.isilang.symbols.SymbolTable;
-    import io.github.lilconrado.isilang.symbols.Type;
+    import io.github.lilconrado.isilang.symbols.*;
     import io.github.lilconrado.isilang.exceptions.SemanticException;
-    import io.github.lilconrado.isilang.ast.Program;
+    import io.github.lilconrado.isilang.ast.*;
+    import io.github.lilconrado.isilang.expressions.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 

@@ -2,12 +2,13 @@ grammar IsiLang;
 
 @header {
     import java.util.ArrayList;
+    import java.util.List;
+    import java.util.Stack;
     import java.lang.String;
-    import io.github.lilconrado.isilang.symbols.Identifier;
-    import io.github.lilconrado.isilang.symbols.SymbolTable;
-    import io.github.lilconrado.isilang.symbols.Type;
+    import io.github.lilconrado.isilang.symbols.*;
     import io.github.lilconrado.isilang.exceptions.SemanticException;
-    import io.github.lilconrado.isilang.ast.Program;
+    import io.github.lilconrado.isilang.ast.*;
+    import io.github.lilconrado.isilang.expressions.*;
 }
 
 @members {
@@ -17,6 +18,16 @@ grammar IsiLang;
     private SymbolTable _symbolTable = new SymbolTable();
     private Identifier _identifier;
     private Program  program = new Program();
+    private Stack<List<AbstractCommand>> stack = new Stack<List<AbstractCommand>>();
+
+    public void init() {
+        program.setSymbolTable(_symbolTable);
+        stack.push(new ArrayList<AbstractCommand>());
+    }
+
+    public void exibirIds(){
+        _symbolTable.getSymbols().values().stream().forEach((id)->System.out.println(id));
+    }
 
     public void verificaId(String name) {
         if (!_symbolTable.exists(name)) {
@@ -28,9 +39,17 @@ grammar IsiLang;
         verificaId(name);
         return _symbolTable.get(name);
     }
+
+    public void generateObjectCode(){
+        program.generateTarget();
+    }
 }
 
-prog: 'programa' (declara)* bloco 'fimprog.' ;
+prog: 'programa' (declara)* bloco 'fimprog.'
+    {
+        program.setCommands(stack.pop());
+    }
+    ;
 
 identifier: ID {
     _varName = _input.LT(-1).getText();
@@ -38,7 +57,6 @@ identifier: ID {
 
     if (!_symbolTable.exists(_varName)) {
         _identifier = new Identifier(_varName, _type);
-        System.out.println(_identifier);
         _symbolTable.add(_identifier);
     } else {
         throw new SemanticException("Variable " + _varName + " already declared");
