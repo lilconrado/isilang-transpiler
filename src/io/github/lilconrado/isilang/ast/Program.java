@@ -22,10 +22,12 @@ public class Program {
             FileWriter fw = new FileWriter(filename);
             PrintWriter pw = new PrintWriter(fw);
             StringBuilder strBuilder = new StringBuilder();
+            strBuilder.append("public class Main {\npublic static void main(String[] args) {\n");
             commands.forEach(c -> {
                 System.out.print(c.generateCode());
                 strBuilder.append(c.generateCode());
             });
+            strBuilder.append("\n}\n}");
             pw.println(strBuilder.toString());
             pw.close();
             fw.close();
