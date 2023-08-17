@@ -13,7 +13,7 @@ public class Program {
     private SymbolTable symbolTable;
 
     public Program() {
-        this.filename = "output.c";
+        this.filename = "output.java";
         this.commands = new ArrayList<AbstractCommand>();
     }
 

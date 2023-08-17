@@ -133,7 +133,7 @@ public class IsiLangLexer extends Lexer {
 	        return _symbolTable.get(name);
 	    }
 
-	    public void generateObjectCode(){
+	    public void generateObjectCode() {
 	        program.generateTarget();
 	    }
 

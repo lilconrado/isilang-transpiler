@@ -85,8 +85,19 @@ cmdLeitura: 'leia' AP ID {
 } FP PF ;
 
 cmdEscrita: 'escreva' AP (ID {
-    verificaId(_input.LT(-1).getText());
-} | TEXT) FP PF ;
+    String idName = _input.LT(-1).getText();
+    Identifier id = _symbolTable.get(idName);
+    if (id == null) {
+        throw new SemanticException("Variable " + idName + " not declared");
+    }
+
+    CmdWrite write = new CmdWrite(id);
+    _stack.peek().add(write);
+} | TEXT {
+    String text = _input.LT(-1).getText();
+    CmdWrite write = new CmdWrite(text);
+    _stack.peek().add(write);
+}) FP PF ;
 
 cmdExpr: ID {
     _idAtribuido = _input.LT(-1).getText();

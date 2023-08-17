@@ -4,6 +4,14 @@ programa
     texto nome.
     inteiro idade.
     real velocidade.
+    inteiro gols.
+    texto nomeTime.
+    texto brasil.
+    texto brasil.
+
+    gols := 1.
+    brasil := "Brasil".
+    nomeTime := brasil.
 
     escreva("Programa Teste").
     escreva("Digite A").
