@@ -111,7 +111,7 @@ cmdExpr: ID {
         id.setValue(_expression.eval());
         _symbolTable.add(id);
 
-        System.out.println("EVAL ("+_expression+") = "+_expression.eval());
+        //System.out.println("EVAL ("+_expression+") = "+_expression.eval());
 
         CmdAttrib attr = new CmdAttrib(id, _expression);
         _stack.peek().add(attr);
@@ -127,16 +127,30 @@ cmdDoWhile: 'faca' AC bloco FC 'enquanto' AP expr OP_REL expr FP ;
 
 expr: termo (OP termo)* ;
 
-termo: ID {
-    _idAtribuido = _input.LT(-1).getText();
-    verificaId(_idAtribuido);
-} | INTEGER {
+termo: INTEGER {
     _expression = new IntegerExpression(_input.LT(-1).getText());
 } | REAL {
     _expression = new RealExpression(_input.LT(-1).getText());
 } | TEXT {
     _expression = new TextExpression(_input.LT(-1).getText());
-} ;
+} | ID {
+      String idName = _input.LT(-1).getText();
+      Identifier id = _symbolTable.get(idName);
+      if (id == null) {
+          throw new SemanticException("Variable " + idName + " not declared");
+      }
+
+      _rightType = id.getType();
+      if (_leftType != _rightType) {
+          throw new SemanticException("Type mismatch (" + _leftType + ", " + _rightType + ")");
+      }
+
+      if (id.getValue() != null) {
+        _expression = new AttributionExpression(_identifier, id);
+      } else {
+          throw new SemanticException("Unassigned variable: " + idName);
+      }
+  };
 
 AP: '(' ;
 

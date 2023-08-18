@@ -7,47 +7,7 @@ programa
     inteiro gols.
     texto nomeTime.
     texto brasil.
-    texto brasil.
 
     gols := 1.
-    brasil := "Brasil".
     nomeTime := brasil.
-
-    escreva("Programa Teste").
-    escreva("Digite A").
-    leia(a).
-    escreva("Digite B").
-    leia(b).
-
-    se (a < b) {
-        c := a + b.
-    } senao {
-        c := a - b.
-    }
-    nome := "John Doe".
-    idade := 20.
-    velocidade := 21.31.
-
-    escreva("C e igual a ").
-    escreva(c).
-
-    d := c * a + b.
-
-    escreva("D e igual a").
-    escreva(d).
-
-    enquanto(a < b) {
-        escreva("a eh menor que b").
-        a := a + 1.
-    }
-
-    /*
-    teste comentario
-    */
-
-    faca {
-        escreva("a eh menor que b").
-        a := a + 1.
-    } enquanto (a < b)
-
 fimprog.

@@ -739,7 +739,7 @@ public class IsiLangParser extends Parser {
 			        id.setValue(_expression.eval());
 			        _symbolTable.add(id);
 
-			        System.out.println("EVAL ("+_expression+") = "+_expression.eval());
+			        //System.out.println("EVAL ("+_expression+") = "+_expression.eval());
 
 			        CmdAttrib attr = new CmdAttrib(id, _expression);
 			        _stack.peek().add(attr);
@@ -1054,10 +1054,10 @@ public class IsiLangParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TermoContext extends ParserRuleContext {
-		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
 		public TerminalNode INTEGER() { return getToken(IsiLangParser.INTEGER, 0); }
 		public TerminalNode REAL() { return getToken(IsiLangParser.REAL, 0); }
 		public TerminalNode TEXT() { return getToken(IsiLangParser.TEXT, 0); }
+		public TerminalNode ID() { return getToken(IsiLangParser.ID, 0); }
 		public TermoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1079,21 +1079,10 @@ public class IsiLangParser extends Parser {
 			setState(152);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
-			case ID:
+			case INTEGER:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(144);
-				match(ID);
-
-				    _idAtribuido = _input.LT(-1).getText();
-				    verificaId(_idAtribuido);
-
-				}
-				break;
-			case INTEGER:
-				enterOuterAlt(_localctx, 2);
-				{
-				setState(146);
 				match(INTEGER);
 
 				    _expression = new IntegerExpression(_input.LT(-1).getText());
@@ -1101,9 +1090,9 @@ public class IsiLangParser extends Parser {
 				}
 				break;
 			case REAL:
-				enterOuterAlt(_localctx, 3);
+				enterOuterAlt(_localctx, 2);
 				{
-				setState(148);
+				setState(146);
 				match(REAL);
 
 				    _expression = new RealExpression(_input.LT(-1).getText());
@@ -1111,13 +1100,38 @@ public class IsiLangParser extends Parser {
 				}
 				break;
 			case TEXT:
-				enterOuterAlt(_localctx, 4);
+				enterOuterAlt(_localctx, 3);
 				{
-				setState(150);
+				setState(148);
 				match(TEXT);
 
 				    _expression = new TextExpression(_input.LT(-1).getText());
 
+				}
+				break;
+			case ID:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(150);
+				match(ID);
+
+				      String idName = _input.LT(-1).getText();
+				      Identifier id = _symbolTable.get(idName);
+				      if (id == null) {
+				          throw new SemanticException("Variable " + idName + " not declared");
+				      }
+
+				      _rightType = id.getType();
+				      if (_leftType != _rightType) {
+				          throw new SemanticException("Type mismatch (" + _leftType + ", " + _rightType + ")");
+				      }
+
+				      if (id.getValue() != null) {
+				        _expression = new AttributionExpression(_identifier, id);
+				      } else {
+				          throw new SemanticException("Unassigned variable: " + idName);
+				      }
+				  
 				}
 				break;
 			default:
@@ -1215,10 +1229,10 @@ public class IsiLangParser extends Parser {
 		"\u0000\u008a\u008c\u0003\u001a\r\u0000\u008b\u0089\u0001\u0000\u0000\u0000"+
 		"\u008c\u008f\u0001\u0000\u0000\u0000\u008d\u008b\u0001\u0000\u0000\u0000"+
 		"\u008d\u008e\u0001\u0000\u0000\u0000\u008e\u0019\u0001\u0000\u0000\u0000"+
-		"\u008f\u008d\u0001\u0000\u0000\u0000\u0090\u0091\u0005\u0016\u0000\u0000"+
-		"\u0091\u0099\u0006\r\uffff\uffff\u0000\u0092\u0093\u0005\u0017\u0000\u0000"+
-		"\u0093\u0099\u0006\r\uffff\uffff\u0000\u0094\u0095\u0005\u0018\u0000\u0000"+
-		"\u0095\u0099\u0006\r\uffff\uffff\u0000\u0096\u0097\u0005\u0019\u0000\u0000"+
+		"\u008f\u008d\u0001\u0000\u0000\u0000\u0090\u0091\u0005\u0017\u0000\u0000"+
+		"\u0091\u0099\u0006\r\uffff\uffff\u0000\u0092\u0093\u0005\u0018\u0000\u0000"+
+		"\u0093\u0099\u0006\r\uffff\uffff\u0000\u0094\u0095\u0005\u0019\u0000\u0000"+
+		"\u0095\u0099\u0006\r\uffff\uffff\u0000\u0096\u0097\u0005\u0016\u0000\u0000"+
 		"\u0097\u0099\u0006\r\uffff\uffff\u0000\u0098\u0090\u0001\u0000\u0000\u0000"+
 		"\u0098\u0092\u0001\u0000\u0000\u0000\u0098\u0094\u0001\u0000\u0000\u0000"+
 		"\u0098\u0096\u0001\u0000\u0000\u0000\u0099\u001b\u0001\u0000\u0000\u0000"+
