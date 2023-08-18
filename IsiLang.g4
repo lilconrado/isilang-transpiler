@@ -47,6 +47,14 @@ grammar IsiLang;
     public void generateObjectCode() {
         program.generateTarget();
     }
+
+    public void verifyUnused() {
+         _symbolTable.getSymbols().forEach((k, v) -> {
+            if (v.getValue() == null) {
+                System.out.printf("Variable %s declared but never used\n", k);
+            }
+        });
+    }
 }
 
 prog: 'programa' (declara)* bloco 'fimprog.'
@@ -119,7 +127,25 @@ cmdExpr: ID {
     }
 } ;
 
-cmdIf: 'se' AP expr OP_REL expr FP AC bloco FC ('senao' AC bloco FC)? ;
+cmdIf: 'se' {
+    _stack.push(new ArrayList<AbstractCommand>());
+    BinaryExpression _relExpr = new BinaryExpression();
+    CmdIf _cmdIf = new CmdIf();
+} AP expr {
+    _relExpr.setLeft(_expression);
+} OP_REL {
+    _relExpr.setOperator(_input.LT(-1).getText().charAt(0));
+} expr {
+    _relExpr.setRight(_expression);
+    _cmdIf.setExpr(_relExpr);
+} FP AC bloco {
+    _cmdIf.setListTrue(_stack.pop());
+} FC ('senao' AC {
+    _stack.push(new ArrayList<AbstractCommand>());
+} bloco FC)? {
+    _cmdIf.setListFalse(_stack.pop());
+    _stack.peek().add(_cmdIf);
+} ;
 
 cmdWhile: 'enquanto' AP expr OP_REL expr FP AC bloco FC ;
 

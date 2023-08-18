@@ -137,6 +137,14 @@ public class IsiLangLexer extends Lexer {
 	        program.generateTarget();
 	    }
 
+	    public void verifyUnused() {
+	         _symbolTable.getSymbols().forEach((k, v) -> {
+	            if (v.getValue() == null) {
+	                System.out.printf("Variable %s declared but never used\n", k);
+	            }
+	        });
+	    }
+
 
 	public IsiLangLexer(CharStream input) {
 		super(input);

@@ -9,5 +9,14 @@ programa
     texto brasil.
 
     gols := 1.
+    brasil := "Brasil".
     nomeTime := brasil.
+
+    se (1 < 2) {
+        escreva("1 < 2").
+        escreva("true").
+    } senao {
+        escreva("1 < 2").
+        escreva("false").
+    }
 fimprog.

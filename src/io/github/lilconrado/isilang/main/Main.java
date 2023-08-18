@@ -18,6 +18,7 @@ public class Main {
 
             parser.init();
             var a = parser.prog();
+            parser.verifyUnused();
             parser.exibirIds();
             parser.generateObjectCode();
 
