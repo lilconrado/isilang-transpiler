@@ -4,7 +4,10 @@ import io.github.lilconrado.isilang.symbols.Identifier;
 
 public class CmdRead extends AbstractCommand {
     private Identifier id;
-
+    public CmdRead(Identifier id) {
+        super();
+        this.id = id;
+    }
     @Override
     public String generateCode() {
         // scanner precisa trazer uma vez soh
