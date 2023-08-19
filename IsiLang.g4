@@ -90,11 +90,19 @@ cmd : cmdLeitura | cmdEscrita | cmdExpr | cmdIf | cmdWhile | cmdDoWhile ;
 
 cmdLeitura: 'leia' AP ID {
     verificaId(_input.LT(-1).getText());
+    Identifier id = _symbolTable.get(idName);
+
+    if (id == null) {
+            throw new SemanticException("Variable " + idName + " not declared");
+    }
+
+    CmdRead read = new CmdRead(id);
 } FP PF ;
 
 cmdEscrita: 'escreva' AP (ID {
     String idName = _input.LT(-1).getText();
     Identifier id = _symbolTable.get(idName);
+
     if (id == null) {
         throw new SemanticException("Variable " + idName + " not declared");
     }
