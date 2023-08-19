@@ -97,7 +97,6 @@ cmdLeitura: 'leia' AP ID {
     }
 
     CmdRead read = new CmdRead(id);
-    _stack.peek().add(read);
 } FP PF ;
 
 cmdEscrita: 'escreva' AP (ID {
