@@ -19,4 +19,8 @@ programa
         escreva("1 < 2").
         escreva("false").
     }
+
+    enquanto (gols < 2) {
+        gols = gols +1.
+    }
 fimprog.

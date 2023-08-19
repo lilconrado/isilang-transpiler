@@ -32,15 +32,7 @@ public class CmdDoWhile extends AbstractCommand {
             sbTrue.append(cmd.generateCode());
         }
 
-        if (!listFalse.isEmpty()) {
-            sbFalse.append("else {\n");
 
-            for (AbstractCommand cmd: listFalse) {
-                sbFalse.append(cmd.generateCode());
-            }
-
-            sbFalse.append("}\n");
-        }
 
         return String.format("do {\n%s} while(%s);\n%s", expr.toString(), sbTrue.toString(), sbFalse.toString());
     }

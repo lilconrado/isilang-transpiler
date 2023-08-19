@@ -147,9 +147,27 @@ cmdIf: 'se' {
     _stack.peek().add(_cmdIf);
 } ;
 
-cmdWhile: 'enquanto' AP expr OP_REL expr FP AC bloco FC ;
+cmdWhile: 'enquanto' {
+    _stack.push(new ArrayList<AbstractCommand>());
+    BinaryExpression _relExpr = new BinaryExpression();
+    CmdWhile _cmdWhile = new CmdIf();
+} AP expr{
+    _stack.push(new ArrayList<AbstractCommand>());
+} OP_REL {
+    _relExpr.setOperator(_input.LT(-1).getText().charAt(0));
+} expr {
+    _relExpr.setRight(_expression);
+    _cmdWhile.setExpr(_relExpr);
+} FP AC bloco {
+    _cmdWhile.setListTrue(_stack.pop());
+} FC ;
 
-cmdDoWhile: 'faca' AC bloco FC 'enquanto' AP expr OP_REL expr FP ;
+cmdDoWhile: 'faca' {
+    stack.push(new ArrayList<AbstractCommand>());
+    BinaryExpression _relExpr = new BinaryExpression();
+    CmdWhile _cmdWhile = new CmdIf();
+}
+AC bloco FC 'enquanto' AP expr OP_REL expr FP ;
 
 expr: termo (OP termo)* ;
 
