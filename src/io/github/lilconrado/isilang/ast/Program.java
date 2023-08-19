@@ -22,6 +22,8 @@ public class Program {
             FileWriter fw = new FileWriter(filename);
             PrintWriter pw = new PrintWriter(fw);
             StringBuilder strBuilder = new StringBuilder();
+
+            strBuilder.append("import java.util.Scanner;\n\n");
             strBuilder.append("public class Main {\npublic static void main(String[] args) {\n");
             commands.forEach(c -> {
                 System.out.print(c.generateCode());

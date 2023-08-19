@@ -89,7 +89,7 @@ bloco: (cmd)+ ;
 cmd : cmdLeitura | cmdEscrita | cmdExpr | cmdIf | cmdWhile | cmdDoWhile ;
 
 cmdLeitura: 'leia' AP ID {
-    verificaId(_input.LT(-1).getText());
+    String idName = _input.LT(-1).getText();
     Identifier id = _symbolTable.get(idName);
 
     if (id == null) {
