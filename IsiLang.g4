@@ -150,7 +150,7 @@ cmdIf: 'se' {
 cmdWhile: 'enquanto' {
     _stack.push(new ArrayList<AbstractCommand>());
     BinaryExpression _relExpr = new BinaryExpression();
-    CmdWhile _cmdWhile = new CmdIf();
+    CmdWhile _cmdWhile = new CmdWhile();
 } AP expr{
     _stack.push(new ArrayList<AbstractCommand>());
 } OP_REL {

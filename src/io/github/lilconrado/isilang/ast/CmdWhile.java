@@ -26,7 +26,7 @@ public class CmdWhile extends AbstractCommand{
     @Override
     public String generateCode() {
         StringBuilder sbTrue = new StringBuilder();
-        StringBuilder sbFalse = new StringBuilder();
+        //StringBuilder sbFalse = new StringBuilder();
 
         for (AbstractCommand cmd: listTrue) {
             sbTrue.append(cmd.generateCode());
@@ -34,7 +34,7 @@ public class CmdWhile extends AbstractCommand{
 
 
 
-        return String.format("while(%s) {\n%s}\n%s", expr.toString(), sbTrue.toString(), sbFalse.toString());
+        return String.format("while(%s) {\n%s}\n%s", expr.toString(), sbTrue.toString() );
     }
 
     @Override
