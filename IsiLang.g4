@@ -165,9 +165,9 @@ cmdWhile: 'enquanto' {
 cmdDoWhile: 'faca' {
     stack.push(new ArrayList<AbstractCommand>());
     BinaryExpression _relExpr = new BinaryExpression();
-    CmdDoWhile _cmdWhile = new CmdDoWhile();
+    CmdDoWhile _cmdDoWhile = new CmdDoWhile();
 } AC bloco {
-    _cmdWhile.setListTrue(_stack.pop());
+    _cmdDoWhile.setListTrue(_stack.pop());
 } FC 'enquanto' AP expr {
     _stack.push(new ArrayList<AbstractCommand>());
 } OP_REL {
