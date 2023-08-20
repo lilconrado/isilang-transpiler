@@ -26,6 +26,13 @@ System.out.println("false");
 while(gols<2) {
 gols=3;
 }
+do {
+gols=5;
+} while(gols<10);
+Scanner scanner = new Scanner(System.in);
+gols=scanner.nextInt();
+nome=scanner.nextLine();
+velocidade=scanner.nextDouble();
 
 }
 }

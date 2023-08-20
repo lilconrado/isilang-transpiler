@@ -14,13 +14,22 @@ programa
 
     se (gols < 2) {
         escreva("1 < 2").
-        escreva("true").
+        escreva("Da pra virar").
     } senao {
         escreva("1 < 2").
-        escreva("false").
+        escreva("Deu ruim").
     }
 
     enquanto(gols < 2) {
         gols := 3.
     }
+
+    faca {
+        gols := 7.
+        escreva("O brasil ja foi melhor").
+    } enquanto(gols<6).
+
+    leia(gols).
+    leia(nome).
+    leia(velocidade).
 fimprog.

@@ -34,7 +34,7 @@ public class CmdDoWhile extends AbstractCommand {
 
 
 
-        return String.format("do {\n%s} while(%s);\n%s", expr.toString(), sbTrue.toString());
+        return String.format("do {\n%s} while(%s);\n", sbTrue.toString(), expr.toString());
     }
 
 

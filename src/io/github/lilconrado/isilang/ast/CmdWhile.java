@@ -28,8 +28,6 @@ public class CmdWhile extends AbstractCommand{
             sbTrue.append(cmd.generateCode());
         }
 
-
-
         return String.format("while(%s) {\n%s}\n", expr.toString(), sbTrue.toString() );
     }
 
