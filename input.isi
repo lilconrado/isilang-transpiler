@@ -1,40 +1,54 @@
 programa
-    // teste comentario
-    inteiro a, b, c, d.
-    texto nome.
+    /*
+        inteiro idade1.
+        inteiro idade2.
+    */
+
+    real perimetro .
+    real l1,l2,l3.
+
     inteiro idade.
-    real velocidade.
-    inteiro gols.
-    texto nomeTime.
-    texto brasil.
+    inteiro contador.
+    inteiro i.
 
-    //gols := 1.
-    //brasil := "Brasil".
-    //nomeTime := brasil.
+    texto nome.
 
-    se (gols < 2) {
-        escreva("1 < 2").
-        escreva("Da pra virar").
+    //regiao perimetro
+    escreva("Calculando o perimetro do triangulo").
+    escreva("lado a").
+    leia(l1).
+    escreva("lado b").
+    leia(l2).
+    escreva("lado c").
+    leia(l3).
 
-        se (gols < 2) {
-            escreva("1 < 2").
-            escreva("Da pra virar").
-        }
+    perimetro := l1+l2+l3.
+    escreva("Perimetro tem tamanho").
+    escreva(perimetro).
+
+    // regiao idade
+    escreva("qual sua idade").
+    leia(idade).
+    se (idade < 18) {
+    escreva("nao pode tirar CNH").
     } senao {
-        escreva("1 < 2").
-        escreva("Deu ruim").
+    escreva("pode tirar CNH").
     }
 
-    enquanto(gols < 2) {
-        gols := gols + 3 + gols + 7.
-    }
-
-    faca {
-        gols := 7.
-        escreva("O brasil ja foi melhor").
-    } enquanto(gols<6).
-
-    leia(gols).
+    // nome
+    escreva("Qual seu nome?").
     leia(nome).
-    leia(velocidade).
+    escreva("seu nome eh").
+    escreva(nome).
+
+    //regiao contador
+    escreva("ate que numero deseja realizar contagem?").
+    leia(contador).
+    i := 1.
+    enquanto (i < contador) {
+    escreva(i).
+    escreva("\n").
+    i := i + 1.
+    }
+
 fimprog.

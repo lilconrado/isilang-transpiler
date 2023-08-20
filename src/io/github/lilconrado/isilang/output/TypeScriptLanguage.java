@@ -17,12 +17,25 @@ public class TypeScriptLanguage extends AbstractLanguage {
 
     @Override
     public String generateHeader() {
-        return "";
+         String header = String.format("function ask() {\n" +
+                "  const readline = require(\"readline\").createInterface({\n" +
+                "    input: process.stdin,\n" +
+                "    output: process.stdout\n" +
+                "  })\n" +
+                "\n" +
+                "  return  new Promise(resolve => readline.question('', ans => {\n" +
+                "  readline.close();\n" +
+                "  resolve(ans);\n" +
+                "}));\n" +
+                "}\n\n" +
+                "async function main(){\n");
+
+        return header;
     }
 
     @Override
     public String generateFooter() {
-        return "";
+        return "}\nmain();\n";
     }
 
     @Override
@@ -57,7 +70,7 @@ public class TypeScriptLanguage extends AbstractLanguage {
         StringBuilder sbTrue = new StringBuilder();
 
         for (AbstractCommand c: listTrue) {
-            sbTrue.append(String.format("\t"+generateCode(c)));
+            sbTrue.append(generateCode(c));
         }
 
         return String.format("while(%s) {\n%s}\n", expr.toString(), sbTrue.toString() );
@@ -71,7 +84,7 @@ public class TypeScriptLanguage extends AbstractLanguage {
         StringBuilder sbTrue = new StringBuilder();
 
         for (AbstractCommand c: cmds) {
-            sbTrue.append(String.format("\t"+generateCode(c)));
+            sbTrue.append(generateCode(c));
         }
 
         return String.format("do {\n%s} while(%s);\n", sbTrue.toString(), expr.toString());
@@ -88,14 +101,14 @@ public class TypeScriptLanguage extends AbstractLanguage {
         StringBuilder sbFalse = new StringBuilder();
 
         for (AbstractCommand c: cmdsTrue) {
-            sbTrue.append(String.format("\t"+generateCode(c)));
+            sbTrue.append(generateCode(c));
         }
 
-        if (!cmdsFalse.isEmpty()) {
+        if (cmdsFalse != null && !cmdsFalse.isEmpty()) {
             sbFalse.append("else {\n");
 
             for (AbstractCommand c: cmdsFalse) {
-                sbFalse.append(String.format("\t"+generateCode(c)));
+                sbFalse.append(generateCode(c));
             }
 
             sbFalse.append("}\n");
@@ -109,12 +122,16 @@ public class TypeScriptLanguage extends AbstractLanguage {
     protected String generateRead(CmdRead cmd) {
         var id = cmd.getId();
 
-        if(id.getType() !=INTEGER && id.getType() !=REAL && id.getType() !=STRING){
-            throw new RuntimeException("Unknown Type");
+        switch (id.getType()) {
+            case INTEGER: return  String.format("%s=Number.parseInt(await ask());\n", id.getName());
+            case REAL: return  String.format("%s=Number.parseFloat(await ask());\n", id.getName());
+            case STRING: return String.format("%s=await ask();\n", id.getName());
+            default: throw new RuntimeException();
         }
 
-        return String.format("%s=window.prompt();\n", id.getName());
+
     }
+
 
     @Override
     protected String generateWrite(CmdWrite write) {

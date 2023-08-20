@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 public class Main {
     public static void main(String[] args) {
         try {
+            String languageType = args[0].isEmpty() ? "java" : args[0];
             var charStream = CharStreams.fromFileName("input.isi");
 
             IsiLangLexer lexer = new IsiLangLexer(charStream);

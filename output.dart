@@ -1,32 +1,43 @@
 import 'dart:io';
 
 void main(){
-int=a;
-int=b;
-int=c;
-int=d;
-string=nome;
-int=idade;
-double=velocidade;
-int=gols;
-string=nomeTime;
-string=brasil;
-print("1 < 2");
-gols=1;
-brasil="Brasil";
-nomeTime=brasil;
-if (gols<2) {
-	"1 < 2"	"Da pra virar"	"1 < 2"	"Deu ruim"}
+double perimetro;
+double l1;
+double l2;
+double l3;
+int idade;
+int contador;
+int i;
+String nome;
+print("Calculando o perimetro do triangulo");
+print("lado a");
+l1=double.parse(stdin.readLineSync()!);
+print("lado b");
+l2=double.parse(stdin.readLineSync()!);
+print("lado c");
+l3=double.parse(stdin.readLineSync()!);
+perimetro=l1+l2+l3;
+print("Perimetro tem tamanho");
+print(perimetro);
+print("qual sua idade");
+idade=int.parse(stdin.readLineSync()!);
+if (idade<18) {
+print("nao pode tirar CNH");
+}
 else {
+print("pode tirar CNH");
 }
-while(gols<2) {
-	gols=gols+3+gols+7;
+print("Qual seu nome?");
+nome=stdin.readLineSync()!;
+print("seu nome eh");
+print(nome);
+print("ate que numero deseja realizar contagem?");
+contador=int.parse(stdin.readLineSync()!);
+i=1;
+while(i<contador) {
+print(i);
+print("\n");
+i=i+1;
 }
-do {
-	gols=7;
-	"O brasil ja foi melhor"} while(gols<6);
-gols=int.parse(stdin.readLineSync()!);
-nome=stdin.readLineSync();
-velocidade=double.parse(stdin.readLineSync()!);
 }
 

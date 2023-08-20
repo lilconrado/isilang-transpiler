@@ -26,6 +26,10 @@ grammar IsiLang;
     private String _idAtribuido;
     private boolean _isAtribuicao;
 
+    public void setLanguage(String nome){
+        program.setLanguage(nome);
+    }
+
     public void init() {
         program.setSymbolTable(_symbolTable);
         _stack.push(new ArrayList<AbstractCommand>());
@@ -172,7 +176,6 @@ cmdIf: 'se' {
 } FP AC bloco {
     _cmdIf.setListTrue(_stack.pop());
 } FC ('senao' AC {
-    System.out.println("else");
     hasElse = true;
     _stack.push(new ArrayList<AbstractCommand>());
 } bloco FC)? {
@@ -282,7 +285,7 @@ INTEGER: [0-9]+ ;
 
 REAL: [0-9]+ ('.' [0-9]+)? ;
 
-TEXT: '"' ([a-z]|[A-Z]|[0-9]|' '|'\t'|'!'|'-'|'='|'<'|'>')* '"';
+TEXT: '"' ([a-z]|[A-Z]|[0-9]|' '|'\t'|'!'|'-'|'='|'<'|'>'|'?'|':' |'\\' )* '"';
 
 BLANK: (' '| '\t' | '\n' | '\r') -> skip;
 

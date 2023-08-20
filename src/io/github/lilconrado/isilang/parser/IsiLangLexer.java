@@ -115,6 +115,10 @@ public class IsiLangLexer extends Lexer {
 	    private String _idAtribuido;
 	    private boolean _isAtribuicao;
 
+	    public void setLanguage(String nome){
+	        program.setLanguage(nome);
+	    }
+
 	    public void init() {
 	        program.setSymbolTable(_symbolTable);
 	        _stack.push(new ArrayList<AbstractCommand>());
@@ -228,8 +232,8 @@ public class IsiLangLexer extends Lexer {
 		"\u0015\u000b\u0017\f\u0019\r\u001b\u000e\u001d\u000f\u001f\u0010!\u0011"+
 		"#\u0012%\u0013\'\u0014)\u0015+\u0016-\u0017/\u00181\u00193\u001a5\u001b"+
 		"7\u001c9\u001d;\u001e=\u001f\u0001\u0000\b\u0003\u0000*+--//\u0002\u0000"+
-		"<<>>\u0001\u0000az\u0003\u000009AZaz\u0001\u000009\u0007\u0000\t\t !-"+
-		"-09<>AZaz\u0003\u0000\t\n\r\r  \u0002\u0000\n\n\r\r\u00f4\u0000\u0001"+
+		"<<>>\u0001\u0000az\u0003\u000009AZaz\u0001\u000009\b\u0000\t\t !--0:<"+
+		"?AZ\\\\az\u0003\u0000\t\n\r\r  \u0002\u0000\n\n\r\r\u00f4\u0000\u0001"+
 		"\u0001\u0000\u0000\u0000\u0000\u0003\u0001\u0000\u0000\u0000\u0000\u0005"+
 		"\u0001\u0000\u0000\u0000\u0000\u0007\u0001\u0000\u0000\u0000\u0000\t\u0001"+
 		"\u0000\u0000\u0000\u0000\u000b\u0001\u0000\u0000\u0000\u0000\r\u0001\u0000"+

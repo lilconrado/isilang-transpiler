@@ -116,9 +116,9 @@ public class JavaLanguage extends AbstractLanguage {
         }
 
         switch (id.getType()) {
-            case INTEGER -> code.append(String.format("%s=scanner.nextInt();\n", id.getName()));
-            case REAL -> code.append(String.format("%s=scanner.nextDouble();\n", id.getName()));
-            case STRING -> code.append(String.format("%s=scanner.nextLine();\n", id.getName()));
+            case INTEGER -> code.append(String.format("%s=scanner.nextInt();scanner.nextLine(); \n", id.getName()));
+            case REAL -> code.append(String.format("%s=scanner.nextDouble();scanner.nextLine(); \n", id.getName()));
+            case STRING -> code.append(String.format("%s=scanner.nextLine(); \n", id.getName()));
             default -> throw new RuntimeException();
         }
 

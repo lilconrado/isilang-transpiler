@@ -39,14 +39,14 @@ public class DartLanguage extends AbstractLanguage {
         Identifier id = cmd.getId();
         String idType = this.getIdType(id);
 
-        return String.format("%s=%s;\n", idType, id.getName());
+        return String.format("%s %s;\n", idType, id.getName());
     }
 
     private String getIdType(Identifier id) {
         return switch (id.getType()) {
             case INTEGER -> "int";
             case REAL -> "double";
-            case STRING -> "string";
+            case STRING -> "String";
             default -> throw new RuntimeException("Unknown Type");
         };
     }
@@ -59,7 +59,7 @@ public class DartLanguage extends AbstractLanguage {
         StringBuilder sbTrue = new StringBuilder();
 
         for (AbstractCommand c: listTrue) {
-            sbTrue.append(String.format("\t"+generateCode(c)));
+            sbTrue.append(generateCode(c));
         }
 
         return String.format("while(%s) {\n%s}\n", expr.toString(), sbTrue.toString() );
@@ -73,7 +73,7 @@ public class DartLanguage extends AbstractLanguage {
         StringBuilder sbTrue = new StringBuilder();
 
         for (AbstractCommand c: cmds) {
-            sbTrue.append(String.format("\t"+generateCode(c)));
+            sbTrue.append(generateCode(c));
         }
 
         return String.format("do {\n%s} while(%s);\n", sbTrue.toString(), expr.toString());
@@ -90,14 +90,14 @@ public class DartLanguage extends AbstractLanguage {
         StringBuilder sbFalse = new StringBuilder();
 
         for (AbstractCommand c: cmdsTrue) {
-            sbTrue.append(String.format("\t"+generateCode(c)));
+            sbTrue.append(generateCode(c));
         }
 
-        if (!cmdsFalse.isEmpty()) {
+        if (cmdsFalse != null && !cmdsFalse.isEmpty()) {
             sbFalse.append("else {\n");
 
             for (AbstractCommand c: cmdsFalse) {
-                sbFalse.append(String.format("\t"+generateCode(c)));
+                sbFalse.append(generateCode(c));
             }
 
             sbFalse.append("}\n");
@@ -116,7 +116,7 @@ public class DartLanguage extends AbstractLanguage {
         switch (id.getType()) {
             case INTEGER -> code.append(String.format("%s=int.parse(stdin.readLineSync()!);\n", id.getName()));
             case REAL -> code.append(String.format("%s=double.parse(stdin.readLineSync()!);\n", id.getName()));
-            case STRING -> code.append(String.format("%s=stdin.readLineSync();\n", id.getName()));
+            case STRING -> code.append(String.format("%s=stdin.readLineSync()!;\n", id.getName()));
             default -> throw new RuntimeException();
         }
 

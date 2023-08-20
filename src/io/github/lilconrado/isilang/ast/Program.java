@@ -1,6 +1,7 @@
 package io.github.lilconrado.isilang.ast;
 
 import io.github.lilconrado.isilang.output.AbstractLanguage;
+import io.github.lilconrado.isilang.output.DartLanguage;
 import io.github.lilconrado.isilang.output.JavaLanguage;
 import io.github.lilconrado.isilang.output.TypeScriptLanguage;
 import io.github.lilconrado.isilang.symbols.SymbolTable;
@@ -20,8 +21,18 @@ public class Program {
 
     public Program() {
         this.commands = new ArrayList<AbstractCommand>();
-        this.language = new JavaLanguage();
-        //this.language = new TypeScriptLanguage();
+    }
+
+    public void setLanguage(String nome){
+        switch (nome.toLowerCase()){
+            case "dart": this.language = new DartLanguage();
+                break;
+            case "ts", "typescript":
+                this.language = new TypeScriptLanguage();
+                break;
+            case "java":
+            default: this.language = new JavaLanguage();
+        }
         this.filename = this.language.getFileName("output");
     }
 

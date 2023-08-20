@@ -122,6 +122,10 @@ public class IsiLangParser extends Parser {
 	    private String _idAtribuido;
 	    private boolean _isAtribuicao;
 
+	    public void setLanguage(String nome){
+	        program.setLanguage(nome);
+	    }
+
 	    public void init() {
 	        program.setSymbolTable(_symbolTable);
 	        _stack.push(new ArrayList<AbstractCommand>());
@@ -890,7 +894,6 @@ public class IsiLangParser extends Parser {
 				setState(114);
 				match(AC);
 
-				    System.out.println("else");
 				    hasElse = true;
 				    _stack.push(new ArrayList<AbstractCommand>());
 
