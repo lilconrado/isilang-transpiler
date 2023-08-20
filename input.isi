@@ -1,37 +1,35 @@
 programa
+    // teste comentario
+    inteiro a, b, c, d.
+    texto nome.
+    inteiro idade.
+    real velocidade.
+    inteiro gols.
+    texto nomeTime.
+    texto brasil.
 
-    declare a, b, c, d, nome, idade, velocidade.
-    escreva("Programa Teste").
-    escreva("Digite A").
-    leia(a).
-    escreva("Digite B").
-    leia(b).
+    gols := 1.
+    brasil := "Brasil".
+    nomeTime := brasil.
 
-    se (a < b) {
-        c := a + b.
+    se (gols < 2) {
+        escreva("1 < 2").
+        escreva("Da pra virar").
     } senao {
-        c := a - b.
+        escreva("1 < 2").
+        escreva("Deu ruim").
     }
-    nome := "John Doe".
-    idade := 20.
-    velocidade := 21.31.
 
-    escreva("C e igual a ").
-    escreva(c).
-
-    d := c * a + b.
-
-    escreva("D e igual a").
-    escreva(d).
-
-    enquanto(a < b) {
-        escreva("a eh menor que b").
-        a := a + 1.
+    enquanto(gols < 2) {
+        gols := gols + 3 + gols + 7.
     }
 
     faca {
-        escreva("a eh menor que b").
-        a := a + 1.
-    } enquanto (a < b)
+        gols := 7.
+        escreva("O brasil ja foi melhor").
+    } enquanto(gols<6).
 
+    leia(gols).
+    leia(nome).
+    leia(velocidade).
 fimprog.
