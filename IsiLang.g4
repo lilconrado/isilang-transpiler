@@ -97,6 +97,7 @@ cmdLeitura: 'leia' AP ID {
     }
 
     CmdRead read = new CmdRead(id);
+    _stack.peek().add(read);
 } FP PF ;
 
 cmdEscrita: 'escreva' AP (ID {
@@ -171,7 +172,7 @@ cmdWhile: 'enquanto' {
 } FC ;
 
 cmdDoWhile: 'faca' {
-    stack.push(new ArrayList<AbstractCommand>());
+    _stack.push(new ArrayList<AbstractCommand>());
     BinaryExpression _relExpr = new BinaryExpression();
     CmdDoWhile _cmdDoWhile = new CmdDoWhile();
 } AC bloco {
