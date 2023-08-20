@@ -29,5 +29,5 @@ do {
 } while(gols<6);
 gols=window.prompt();
 nome=window.prompt();
-velocidade=window.prompt();
+
 

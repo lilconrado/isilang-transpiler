@@ -7,15 +7,19 @@ programa
     inteiro gols.
     texto nomeTime.
     texto brasil.
-        escreva("1 < 2").
 
-    gols := 1.
-    brasil := "Brasil".
-    nomeTime := brasil.
+    //gols := 1.
+    //brasil := "Brasil".
+    //nomeTime := brasil.
 
     se (gols < 2) {
         escreva("1 < 2").
         escreva("Da pra virar").
+
+        se (gols < 2) {
+            escreva("1 < 2").
+            escreva("Da pra virar").
+        }
     } senao {
         escreva("1 < 2").
         escreva("Deu ruim").

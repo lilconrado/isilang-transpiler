@@ -89,7 +89,7 @@ public class JavaLanguage extends AbstractLanguage {
             sbTrue.append(generateCode(c));
         }
 
-        if (!cmdsFalse.isEmpty()) {
+        if (cmdsFalse != null && !cmdsFalse.isEmpty()) {
             sbFalse.append("else {\n");
 
             for (AbstractCommand c: cmdsFalse) {

@@ -159,6 +159,8 @@ cmdIf: 'se' {
     _stack.push(new ArrayList<AbstractCommand>());
     BinaryExpression _relExpr = new BinaryExpression();
     CmdIf _cmdIf = new CmdIf();
+
+    boolean hasElse = false;
 } AP expr {
     _relExpr.setLeft(_expression);
 } OP_REL {
@@ -170,9 +172,14 @@ cmdIf: 'se' {
 } FP AC bloco {
     _cmdIf.setListTrue(_stack.pop());
 } FC ('senao' AC {
+    System.out.println("else");
+    hasElse = true;
     _stack.push(new ArrayList<AbstractCommand>());
 } bloco FC)? {
-    _cmdIf.setListFalse(_stack.pop());
+    if (hasElse) {
+        _cmdIf.setListFalse(_stack.pop());
+    }
+
     _stack.peek().add(_cmdIf);
 } ;
 
