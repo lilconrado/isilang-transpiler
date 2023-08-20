@@ -32,10 +32,4 @@ public class CmdWrite extends AbstractCommand {
         this.text = text;
     }
 
-    @Override
-    public String generateCode() {
-        String tmp = id == null ? text : id.getName();
-
-        return String.format("System.out.println(%s);\n", tmp);
-    }
 }

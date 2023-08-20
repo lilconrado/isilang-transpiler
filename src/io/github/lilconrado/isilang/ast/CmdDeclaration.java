@@ -21,22 +21,5 @@ public class CmdDeclaration extends AbstractCommand {
     public void setId(Identifier id) {
         this.id = id;
     }
-    @Override
-    public String generateCode() {
-        String idType = this.getIdType();
-        return String.format("%s %s;\n", idType, this.id.getName());
-    }
 
-    private String getIdType() {
-        switch (this.id.getType()) {
-            case INTEGER:
-                return "int";
-            case REAL:
-                return "double";
-            case STRING:
-                return "String";
-            default:
-                throw new RuntimeException("Unknown Type");
-        }
-    }
 }

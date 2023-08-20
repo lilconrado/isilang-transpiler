@@ -1,25 +1,29 @@
 package io.github.lilconrado.isilang.output;
 
+
 import io.github.lilconrado.isilang.ast.*;
 import io.github.lilconrado.isilang.expressions.AbstractExpression;
 import io.github.lilconrado.isilang.symbols.Identifier;
 
-import java.util.List;
+import static io.github.lilconrado.isilang.symbols.Type.INTEGER;
+import static io.github.lilconrado.isilang.symbols.Type.REAL;
+import static io.github.lilconrado.isilang.symbols.Type.STRING;
 
-public class JavaLanguage extends AbstractLanguage {
+
+public class DartLanguage extends AbstractLanguage {
     @Override
-    public String generateHeader() {
-        return "import java.util.Scanner;\n\npublic class Main {\npublic static void main(String[] args) {\n";
+    public String getFileName(String fileName) {
+        return String.format("%s.dart", fileName);
     }
 
     @Override
-    public String getFileName(String fileName) {
-        return String.format("%s.java", fileName);
+    public String generateHeader() {
+        return "import 'dart:io';\n\nvoid main(){\n";
     }
 
     @Override
     public String generateFooter() {
-        return "\n}\n}";
+        return "}\n";
     }
 
     @Override
@@ -35,14 +39,14 @@ public class JavaLanguage extends AbstractLanguage {
         Identifier id = cmd.getId();
         String idType = this.getIdType(id);
 
-        return String.format("%s %s;\n", idType, id.getName());
+        return String.format("%s=%s;\n", idType, id.getName());
     }
 
     private String getIdType(Identifier id) {
         return switch (id.getType()) {
             case INTEGER -> "int";
             case REAL -> "double";
-            case STRING -> "String";
+            case STRING -> "string";
             default -> throw new RuntimeException("Unknown Type");
         };
     }
@@ -55,7 +59,7 @@ public class JavaLanguage extends AbstractLanguage {
         StringBuilder sbTrue = new StringBuilder();
 
         for (AbstractCommand c: listTrue) {
-            sbTrue.append(generateCode(c));
+            sbTrue.append(String.format("\t"+generateCode(c)));
         }
 
         return String.format("while(%s) {\n%s}\n", expr.toString(), sbTrue.toString() );
@@ -69,12 +73,12 @@ public class JavaLanguage extends AbstractLanguage {
         StringBuilder sbTrue = new StringBuilder();
 
         for (AbstractCommand c: cmds) {
-            sbTrue.append(generateCode(c));
+            sbTrue.append(String.format("\t"+generateCode(c)));
         }
 
         return String.format("do {\n%s} while(%s);\n", sbTrue.toString(), expr.toString());
-    }
 
+    }
 
     @Override
     protected String generateIf(CmdIf cmd) {
@@ -86,23 +90,22 @@ public class JavaLanguage extends AbstractLanguage {
         StringBuilder sbFalse = new StringBuilder();
 
         for (AbstractCommand c: cmdsTrue) {
-            sbTrue.append(generateCode(c));
+            sbTrue.append(String.format("\t"+generateCode(c)));
         }
 
-        if (cmdsFalse != null && !cmdsFalse.isEmpty()) {
+        if (!cmdsFalse.isEmpty()) {
             sbFalse.append("else {\n");
 
             for (AbstractCommand c: cmdsFalse) {
-                sbFalse.append(generateCode(c));
+                sbFalse.append(String.format("\t"+generateCode(c)));
             }
 
             sbFalse.append("}\n");
         }
 
         return String.format("if (%s) {\n%s}\n%s", expr.toString(), sbTrue.toString(), sbFalse.toString());
-    }
 
-    private static boolean firstScanner = false;
+    }
 
     @Override
     protected String generateRead(CmdRead cmd) {
@@ -110,15 +113,10 @@ public class JavaLanguage extends AbstractLanguage {
 
         StringBuilder code = new StringBuilder() ;
 
-        if(!firstScanner){
-            code.append( "Scanner scanner = new Scanner(System.in);\n");
-            firstScanner = true;
-        }
-
         switch (id.getType()) {
-            case INTEGER -> code.append(String.format("%s=scanner.nextInt();\n", id.getName()));
-            case REAL -> code.append(String.format("%s=scanner.nextDouble();\n", id.getName()));
-            case STRING -> code.append(String.format("%s=scanner.nextLine();\n", id.getName()));
+            case INTEGER -> code.append(String.format("%s=int.parse(stdin.readLineSync()!);\n", id.getName()));
+            case REAL -> code.append(String.format("%s=double.parse(stdin.readLineSync()!);\n", id.getName()));
+            case STRING -> code.append(String.format("%s=stdin.readLineSync();\n", id.getName()));
             default -> throw new RuntimeException();
         }
 
@@ -126,10 +124,8 @@ public class JavaLanguage extends AbstractLanguage {
     }
 
     @Override
-    public String generateWrite(CmdWrite write) {
+    protected String generateWrite(CmdWrite write) {
         String tmp = write.getId() == null ? write.getText() : write.getId().getName();
-
-        return String.format("System.out.println(%s);\n", tmp);
+        return String.format("print(%s);\n", tmp);
     }
-
 }
