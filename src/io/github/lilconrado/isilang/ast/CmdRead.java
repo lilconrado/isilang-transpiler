@@ -31,9 +31,4 @@ public class CmdRead extends AbstractCommand {
         }
         return code.toString();
     }
-
-    @Override
-    public void run() {
-
-    }
 }

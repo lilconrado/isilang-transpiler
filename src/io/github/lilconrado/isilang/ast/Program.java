@@ -54,11 +54,4 @@ public class Program {
     public void setSymbolTable(SymbolTable symbolTable) {
         this.symbolTable = symbolTable;
     }
-
-    public void run() {
-        commands.stream().forEach(c -> {
-            c.run();
-            System.out.println(symbolTable.getSymbols().values());
-        });
-    }
 }

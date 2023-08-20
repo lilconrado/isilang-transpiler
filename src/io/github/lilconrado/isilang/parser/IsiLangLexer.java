@@ -141,7 +141,7 @@ public class IsiLangLexer extends Lexer {
 
 	    public void verifyUnused() {
 	         _symbolTable.getSymbols().forEach((k, v) -> {
-	            if (v.getValue() == null) {
+	            if (!v.isUsed()) {
 	                System.out.printf("Variable %s declared but never used\n", k);
 	            }
 	        });

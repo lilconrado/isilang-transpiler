@@ -21,9 +21,4 @@ public class CmdWrite extends AbstractCommand {
         String tmp = id == null ? text : id.getName();
         return String.format("System.out.println(%s);\n", tmp);
     }
-
-    @Override
-    public void run() {
-
-    }
 }

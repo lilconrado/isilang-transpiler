@@ -12,11 +12,6 @@ public class TextExpression extends AbstractExpression {
         super();
     }
 
-    @Override
-    public String eval() {
-        return this.value;
-    }
-
     public String toString() {
         return this.value;
     }

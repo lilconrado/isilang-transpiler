@@ -7,6 +7,16 @@ public class Identifier {
 
     protected Object value;
 
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    public void setUsed(boolean used) {
+        isUsed = used;
+    }
+
+    protected boolean isUsed;
+
     @Override
     public String toString() {
         return "Identifier [name=" + name + ", type=" + type + ", value=" + value + "]";
@@ -22,20 +32,6 @@ public class Identifier {
 
     public Type getType() {
         return type;
-    }
-
-    public void setType(String value) {
-        if (this.type != Type.UNDEFINED) {
-            return;
-        }
-
-        if (value.charAt(0) == '"') {
-            this.type = Type.STRING;
-        } else if (value.matches("[+-]?[0-9]*")) {
-            this.type = Type.INTEGER;
-        } else if (value.matches("[+-]?[0-9]*\\.[0-9]+")) {
-            this.type = Type.REAL;
-        }
     }
 
     public Object getValue() {

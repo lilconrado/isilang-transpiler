@@ -43,9 +43,4 @@ public class CmdIf extends AbstractCommand {
 
         return String.format("if (%s) {\n%s}\n%s", expr.toString(), sbTrue.toString(), sbFalse.toString());
     }
-
-    @Override
-    public void run() {
-
-    }
 }

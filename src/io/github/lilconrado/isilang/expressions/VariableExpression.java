@@ -9,11 +9,6 @@ public class VariableExpression extends AbstractExpression {
         this.id = id;
     }
 
-    @Override
-    public Object eval() {
-        return this.id.getValue();
-    }
-
     public String toString() {
         return this.id.getName();
     }

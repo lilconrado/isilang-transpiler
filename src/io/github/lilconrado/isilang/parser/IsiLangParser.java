@@ -148,7 +148,7 @@ public class IsiLangParser extends Parser {
 
 	    public void verifyUnused() {
 	         _symbolTable.getSymbols().forEach((k, v) -> {
-	            if (v.getValue() == null) {
+	            if (!v.isUsed()) {
 	                System.out.printf("Variable %s declared but never used\n", k);
 	            }
 	        });
@@ -609,6 +609,7 @@ public class IsiLangParser extends Parser {
 
 			    CmdRead read = new CmdRead(id);
 			    _stack.peek().add(read);
+			    id.setUsed(true);
 
 			setState(78);
 			match(FP);
@@ -747,6 +748,8 @@ public class IsiLangParser extends Parser {
 			    _rightType = null;
 			    _isAtribuicao = true;
 
+			    _symbolTable.get(_idAtribuido).setUsed(true);
+
 			setState(94);
 			match(ATTR);
 			setState(95);
@@ -756,7 +759,6 @@ public class IsiLangParser extends Parser {
 
 			    Identifier id = _symbolTable.get(_idAtribuido);
 			    if (_expression != null) {
-			        id.setValue(_expression.eval());
 			        _symbolTable.add(id);
 
 			        CmdAttrib attr = new CmdAttrib(id, _expression);
@@ -1212,7 +1214,7 @@ public class IsiLangParser extends Parser {
 				              throw new SemanticException("Type mismatch (" + _leftType + ", " + _rightType + ")");
 				          }
 
-				          if (id.getValue() != null) {
+				          if (id.isUsed()) {
 				            _expression = new AttributionExpression(_identifier, id);
 				          } else {
 				              throw new SemanticException("Unassigned variable: " + idName);

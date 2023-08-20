@@ -42,9 +42,4 @@ public class CmdAttrib extends AbstractCommand{
     public String generateCode() {
         return id.getName() + "=" + expr.toString() + ";\n";
     }
-
-    @Override
-    public void run() {
-        id.setValue(expr.eval());
-    }
 }

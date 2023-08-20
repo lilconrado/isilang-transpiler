@@ -39,9 +39,4 @@ public class CmdDeclaration extends AbstractCommand {
                 throw new RuntimeException("Unknown Type");
         }
     }
-
-    @Override
-    public void run() {
-
-    }
 }

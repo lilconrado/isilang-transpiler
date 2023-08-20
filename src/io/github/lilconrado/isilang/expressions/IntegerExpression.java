@@ -20,11 +20,6 @@ public class IntegerExpression extends AbstractExpression {
         this.value = value;
     }
 
-    @Override
-    public Object eval() {
-        return value;
-    }
-
     public String toString() {
         return String.valueOf(value);
     }

@@ -30,9 +30,4 @@ public class CmdWhile extends AbstractCommand{
 
         return String.format("while(%s) {\n%s}\n", expr.toString(), sbTrue.toString() );
     }
-
-    @Override
-    public void run() {
-
-    }
 }

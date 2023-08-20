@@ -11,11 +11,6 @@ public class AttributionExpression extends AbstractExpression {
         this.right = right;
     }
 
-    @Override
-    public Object eval() {
-        return null;
-    }
-
     public String toString() {
         return String.format("%s", this.right.getName());
     }
