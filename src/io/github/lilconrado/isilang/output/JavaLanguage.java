@@ -55,7 +55,7 @@ public class JavaLanguage extends AbstractLanguage {
         StringBuilder sbTrue = new StringBuilder();
 
         for (AbstractCommand c: listTrue) {
-            sbTrue.append(cmd.generateCode());
+            sbTrue.append(this.generateCode(c));
         }
 
         return String.format("while(%s) {\n%s}\n", expr.toString(), sbTrue.toString() );
@@ -69,7 +69,7 @@ public class JavaLanguage extends AbstractLanguage {
         StringBuilder sbTrue = new StringBuilder();
 
         for (AbstractCommand c: cmds) {
-            sbTrue.append(c.generateCode());
+            sbTrue.append(this.generateCode(c));
         }
 
         return String.format("do {\n%s} while(%s);\n", sbTrue.toString(), expr.toString());
@@ -86,10 +86,10 @@ public class JavaLanguage extends AbstractLanguage {
         StringBuilder sbFalse = new StringBuilder();
 
         for (AbstractCommand c: cmdsTrue) {
-            sbTrue.append(c.generateCode());
+            sbTrue.append(this.generateCode(c) );
         }
 
-        if (!cmdsFalse.isEmpty()) {
+        if (cmdsFalse != null && !cmdsFalse.isEmpty()) {
             sbFalse.append("else {\n");
 
             for (AbstractCommand c: cmdsFalse) {

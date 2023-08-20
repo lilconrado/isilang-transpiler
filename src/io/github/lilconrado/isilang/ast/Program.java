@@ -20,8 +20,8 @@ public class Program {
 
     public Program() {
         this.commands = new ArrayList<AbstractCommand>();
-        //this.language = new JavaLanguage();
-        this.language = new TypeScriptLanguage();
+        this.language = new JavaLanguage();
+        //this.language = new TypeScriptLanguage();
         this.filename = this.language.getFileName("output");
     }
 

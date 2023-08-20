@@ -12,22 +12,20 @@ double velocidade;
 int gols;
 String nomeTime;
 String brasil;
-System.out.println("1 < 2");
-gols=1;
-brasil="Brasil";
-nomeTime=brasil;
 if (gols<2) {
 System.out.println("1 < 2");
 System.out.println("Da pra virar");
+if (gols<2) {
+System.out.println("1 < 2");
+System.out.println("Da pra virar");
+}
 }
 else {
 System.out.println("1 < 2");
 System.out.println("Deu ruim");
 }
 while(gols<2) {
-while(gols<2) {
 gols=gols+3+gols+7;
-}
 }
 do {
 gols=7;

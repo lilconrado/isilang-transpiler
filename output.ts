@@ -8,5 +8,4 @@ let velocidade:number;
 let gols:number;
 let nomeTime:string;
 let brasil:string;
-console.log("1 < 2");
 

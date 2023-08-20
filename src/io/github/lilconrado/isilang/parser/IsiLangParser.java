@@ -848,6 +848,8 @@ public class IsiLangParser extends Parser {
 			    BinaryExpression _relExpr = new BinaryExpression();
 			    CmdIf _cmdIf = new CmdIf();
 
+			    boolean hasElse = false;
+
 			setState(101);
 			match(AP);
 			setState(102);
@@ -888,6 +890,8 @@ public class IsiLangParser extends Parser {
 				setState(114);
 				match(AC);
 
+				    System.out.println("else");
+				    hasElse = true;
 				    _stack.push(new ArrayList<AbstractCommand>());
 
 				setState(116);
@@ -898,7 +902,10 @@ public class IsiLangParser extends Parser {
 			}
 
 
-			    _cmdIf.setListFalse(_stack.pop());
+			    if (hasElse) {
+			        _cmdIf.setListFalse(_stack.pop());
+			    }
+
 			    _stack.peek().add(_cmdIf);
 
 			}
