@@ -12,7 +12,7 @@ programa
     brasil := "Brasil".
     nomeTime := brasil.
 
-    se (1 < 2) {
+    se (gols < 2) {
         escreva("1 < 2").
         escreva("true").
     } senao {
