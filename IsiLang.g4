@@ -86,7 +86,7 @@ tipo : 'inteiro' { _type = Type.INTEGER; }
 
 bloco: (cmd)+ ;
 
-cmd : cmdLeitura | cmdEscrita | cmdExpr | cmdIf | cmdWhile | cmdDoWhile ;
+cmd : cmdLeitura | cmdEscrita | cmdExpr | cmdIf | cmdWhile ;
 
 cmdLeitura: 'leia' AP ID {
     String idName = _input.LT(-1).getText();
@@ -156,12 +156,13 @@ cmdIf: 'se' {
     _stack.peek().add(_cmdIf);
 } ;
 
+
 cmdWhile: 'enquanto' {
     _stack.push(new ArrayList<AbstractCommand>());
     BinaryExpression _relExpr = new BinaryExpression();
     CmdWhile _cmdWhile = new CmdWhile();
 } AP expr{
-    _stack.push(new ArrayList<AbstractCommand>());
+    _relExpr.setLeft(_expression);
 } OP_REL {
     _relExpr.setOperator(_input.LT(-1).getText().charAt(0));
 } expr {
@@ -170,7 +171,7 @@ cmdWhile: 'enquanto' {
 } FP AC bloco {
     _cmdWhile.setListTrue(_stack.pop());
 } FC ;
-
+/*
 cmdDoWhile: 'faca' {
     _stack.push(new ArrayList<AbstractCommand>());
     BinaryExpression _relExpr = new BinaryExpression();
@@ -185,7 +186,7 @@ cmdDoWhile: 'faca' {
     _relExpr.setRight(_expression);
     _cmdDoWhile.setExpr(_relExpr);
 } FP ;
-
+*/
 expr: termo (OP termo)* ;
 
 termo: INTEGER {

@@ -19,14 +19,10 @@ public class CmdWhile extends AbstractCommand{
         this.listTrue = listTrue;
     }
 
-    public void setListFalse(List<AbstractCommand> listFalse) {
-        this.listFalse = listFalse;
-    }
 
     @Override
     public String generateCode() {
         StringBuilder sbTrue = new StringBuilder();
-        //StringBuilder sbFalse = new StringBuilder();
 
         for (AbstractCommand cmd: listTrue) {
             sbTrue.append(cmd.generateCode());

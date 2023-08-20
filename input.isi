@@ -20,7 +20,7 @@ programa
         escreva("false").
     }
 
-    enquanto (gols < 2) {
-        gols = gols +1.
+    enquanto(gols < 2) {
+        gols := 3.
     }
 fimprog.
