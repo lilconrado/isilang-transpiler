@@ -38,8 +38,5 @@ public class CmdAttrib extends AbstractCommand{
     private Identifier id;
     private AbstractExpression expr;
 
-    @Override
-    public String generateCode() {
-        return id.getName() + "=" + expr.toString() + ";\n";
-    }
+
 }

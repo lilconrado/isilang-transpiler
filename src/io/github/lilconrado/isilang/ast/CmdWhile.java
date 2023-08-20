@@ -25,14 +25,5 @@ public class CmdWhile extends AbstractCommand{
     }
 
 
-    @Override
-    public String generateCode() {
-        StringBuilder sbTrue = new StringBuilder();
 
-        for (AbstractCommand cmd: listTrue) {
-            sbTrue.append(cmd.generateCode());
-        }
-
-        return String.format("while(%s) {\n%s}\n", expr.toString(), sbTrue.toString() );
-    }
 }
