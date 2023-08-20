@@ -8,8 +8,13 @@ public class CmdWhile extends AbstractCommand{
     private AbstractExpression expr;
     private List<AbstractCommand> listTrue;
 
-    private List<AbstractCommand> listFalse;
+    public AbstractExpression getExpr() {
+        return expr;
+    }
 
+    public List<AbstractCommand> getListTrue() {
+        return listTrue;
+    }
 
     public void setExpr(AbstractExpression expr) {
         this.expr = expr;

@@ -1,5 +1,8 @@
 package io.github.lilconrado.isilang.ast;
 
+import io.github.lilconrado.isilang.output.AbstractLanguage;
+import io.github.lilconrado.isilang.output.JavaLanguage;
+import io.github.lilconrado.isilang.output.TypeScriptLanguage;
 import io.github.lilconrado.isilang.symbols.SymbolTable;
 
 import java.io.FileWriter;
@@ -13,9 +16,13 @@ public class Program {
     private List<AbstractCommand> commands;
     private SymbolTable symbolTable;
 
+    private AbstractLanguage language;
+
     public Program() {
-        this.filename = "output.java";
         this.commands = new ArrayList<AbstractCommand>();
+        //this.language = new JavaLanguage();
+        this.language = new TypeScriptLanguage();
+        this.filename = this.language.getFileName("output");
     }
 
     public void generateTarget() {
@@ -24,12 +31,11 @@ public class Program {
             PrintWriter pw = new PrintWriter(fw);
             StringBuilder strBuilder = new StringBuilder();
 
-            strBuilder.append("import java.util.Scanner;\n\n");
-            strBuilder.append("public class Main {\npublic static void main(String[] args) {\n");
+            strBuilder.append(language.generateHeader());
             commands.forEach(c -> {
-                strBuilder.append(c.generateCode());
+                strBuilder.append(this.language.generateCode(c));
             });
-            strBuilder.append("\n}\n}");
+            strBuilder.append(language.generateFooter());
             pw.println(strBuilder.toString());
             pw.close();
             fw.close();
