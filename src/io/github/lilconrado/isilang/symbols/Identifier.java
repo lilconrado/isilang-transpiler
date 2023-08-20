@@ -5,8 +5,6 @@ public class Identifier {
 
     protected Type type;
 
-    protected Object value;
-
     public boolean isUsed() {
         return isUsed;
     }
@@ -19,7 +17,7 @@ public class Identifier {
 
     @Override
     public String toString() {
-        return "Identifier [name=" + name + ", type=" + type + ", value=" + value + "]";
+        return "Identifier [name=" + name + ", type=" + type + "]";
     }
 
     public String getName() {
@@ -32,14 +30,6 @@ public class Identifier {
 
     public Type getType() {
         return type;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
     }
 
     public Identifier(String name) {

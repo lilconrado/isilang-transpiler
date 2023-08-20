@@ -24,7 +24,7 @@ System.out.println("1 < 2");
 System.out.println("Deu ruim");
 }
 while(gols<2) {
-gols=3;
+gols=gols+3+gols+7;
 }
 do {
 gols=7;

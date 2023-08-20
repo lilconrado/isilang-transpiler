@@ -22,6 +22,7 @@ grammar IsiLang;
     private Type _rightType;
     private Type _leftType;
     private AbstractExpression _expression;
+    private PolyExpression _polyExpr;
     private String _idAtribuido;
     private boolean _isAtribuicao;
 
@@ -56,6 +57,19 @@ grammar IsiLang;
                 System.out.printf("Variable %s declared but never used\n", k);
             }
         });
+    }
+
+    private void resetExpressions() {
+        _expression = null;
+        _polyExpr = null;
+    }
+
+    private void setExpressions(AbstractExpression expr) {
+        if (_polyExpr != null) {
+            _polyExpr.addExpression(expr);
+        } else {
+            _expression = expr;
+        }
     }
 }
 
@@ -133,9 +147,10 @@ cmdExpr: ID {
     if (_expression != null) {
         _symbolTable.add(id);
 
-        CmdAttrib attr = new CmdAttrib(id, _expression);
+        CmdAttrib attr = new CmdAttrib(id, _polyExpr != null ? _polyExpr : _expression);
+
         _stack.peek().add(attr);
-        _expression = null;
+        resetExpressions();
         _isAtribuicao = false;
     }
 } ;
@@ -151,6 +166,7 @@ cmdIf: 'se' {
 } expr {
     _relExpr.setRight(_expression);
     _cmdIf.setExpr(_relExpr);
+    resetExpressions();
 } FP AC bloco {
     _cmdIf.setListTrue(_stack.pop());
 } FC ('senao' AC {
@@ -159,7 +175,6 @@ cmdIf: 'se' {
     _cmdIf.setListFalse(_stack.pop());
     _stack.peek().add(_cmdIf);
 } ;
-
 
 cmdWhile: 'enquanto' {
     _stack.push(new ArrayList<AbstractCommand>());
@@ -171,6 +186,7 @@ cmdWhile: 'enquanto' {
     _relExpr.setOperator(_input.LT(-1).getText().charAt(0));
 } expr {
     _relExpr.setRight(_expression);
+    resetExpressions();
     _cmdWhile.setExpr(_relExpr);
 } FP AC bloco {
     _cmdWhile.setListTrue(_stack.pop());
@@ -191,37 +207,46 @@ cmdDoWhile: 'faca' {
     _relExpr.setRight(_expression);
     _cmdDoWhile.setExpr(_relExpr);
     _stack.peek().add(_cmdDoWhile);
+    _expression = null;
+    _polyExpr = null;
 } FP PF;
 
-expr: termo (OP termo)* ;
+expr: termo (OP {
+    if (_polyExpr == null) {
+        _polyExpr = new PolyExpression();
+        _polyExpr.addExpression(_expression);
+    }
+
+    _polyExpr.addOperator(_input.LT(-1).getText());
+} termo)* ;
 
 termo: INTEGER {
-    _expression = new IntegerExpression(_input.LT(-1).getText());
+    setExpressions(new IntegerExpression(_input.LT(-1).getText()));
 } | REAL {
-    _expression = new RealExpression(_input.LT(-1).getText());
+    setExpressions(new RealExpression(_input.LT(-1).getText()));
 } | TEXT {
-    _expression = new TextExpression(_input.LT(-1).getText());
+    setExpressions(new TextExpression(_input.LT(-1).getText()));
 } | ID {
-      String idName = _input.LT(-1).getText();
-      Identifier id = _symbolTable.get(idName);
-      if (id == null) {
-          throw new SemanticException("Variable " + idName + " not declared");
-      }
+    String idName = _input.LT(-1).getText();
+    Identifier id = _symbolTable.get(idName);
+    if (id == null) {
+        throw new SemanticException("Variable " + idName + " not declared");
+    }
 
-      if (_isAtribuicao) {
-          _rightType = id.getType();
-          if (_leftType != _rightType) {
+    if (_isAtribuicao) {
+        _rightType = id.getType();
+        if (_leftType != _rightType) {
               throw new SemanticException("Type mismatch (" + _leftType + ", " + _rightType + ")");
-          }
+        }
 
-          if (id.isUsed()) {
-            _expression = new AttributionExpression(_identifier, id);
-          } else {
-              throw new SemanticException("Unassigned variable: " + idName);
-          }
-      } else {
-        _expression = new VariableExpression(id);
-      }
+        if (id.isUsed()) {
+            setExpressions(new AttributionExpression(_identifier, id));
+        } else {
+            throw new SemanticException("Unassigned variable: " + idName);
+        }
+    } else {
+        setExpressions(new VariableExpression(id));
+    }
   };
 
 AP: '(' ;

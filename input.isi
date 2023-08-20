@@ -21,7 +21,7 @@ programa
     }
 
     enquanto(gols < 2) {
-        gols := 3.
+        gols := gols + 3 + gols + 7.
     }
 
     faca {

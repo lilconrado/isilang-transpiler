@@ -111,6 +111,7 @@ public class IsiLangLexer extends Lexer {
 	    private Type _rightType;
 	    private Type _leftType;
 	    private AbstractExpression _expression;
+	    private PolyExpression _polyExpr;
 	    private String _idAtribuido;
 	    private boolean _isAtribuicao;
 
@@ -145,6 +146,19 @@ public class IsiLangLexer extends Lexer {
 	                System.out.printf("Variable %s declared but never used\n", k);
 	            }
 	        });
+	    }
+
+	    private void resetExpressions() {
+	        _expression = null;
+	        _polyExpr = null;
+	    }
+
+	    private void setExpressions(AbstractExpression expr) {
+	        if (_polyExpr != null) {
+	            _polyExpr.addExpression(expr);
+	        } else {
+	            _expression = expr;
+	        }
 	    }
 
 
