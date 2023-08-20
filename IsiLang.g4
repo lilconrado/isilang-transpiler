@@ -172,6 +172,7 @@ cmdWhile: 'enquanto' {
     _cmdWhile.setExpr(_relExpr);
 } FP AC bloco {
     _cmdWhile.setListTrue(_stack.pop());
+    _stack.peek().add(_cmdWhile);
 } FC ;
 /*
 cmdDoWhile: 'faca' {

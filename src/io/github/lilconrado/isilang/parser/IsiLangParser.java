@@ -117,10 +117,12 @@ public class IsiLangParser extends Parser {
 	    private Type _leftType;
 	    private AbstractExpression _expression;
 	    private String _idAtribuido;
+	    private boolean _isAtribuicao;
 
 	    public void init() {
 	        program.setSymbolTable(_symbolTable);
 	        _stack.push(new ArrayList<AbstractCommand>());
+	        _isAtribuicao = false;
 	    }
 
 	    public void exibirIds(){
@@ -731,6 +733,7 @@ public class IsiLangParser extends Parser {
 
 			    _leftType = _symbolTable.get(_idAtribuido).getType();
 			    _rightType = null;
+			    _isAtribuicao = true;
 
 			setState(91);
 			match(ATTR);
@@ -744,11 +747,10 @@ public class IsiLangParser extends Parser {
 			        id.setValue(_expression.eval());
 			        _symbolTable.add(id);
 
-			        //System.out.println("EVAL ("+_expression+") = "+_expression.eval());
-
 			        CmdAttrib attr = new CmdAttrib(id, _expression);
 			        _stack.peek().add(attr);
 			        _expression = null;
+			        _isAtribuicao = false;
 			    }
 
 			}
@@ -951,6 +953,7 @@ public class IsiLangParser extends Parser {
 			bloco();
 
 			    _cmdWhile.setListTrue(_stack.pop());
+			    _stack.peek().add(_cmdWhile);
 
 			setState(133);
 			match(FC);
@@ -1100,15 +1103,19 @@ public class IsiLangParser extends Parser {
 				          throw new SemanticException("Variable " + idName + " not declared");
 				      }
 
-				      _rightType = id.getType();
-				      if (_leftType != _rightType) {
-				          throw new SemanticException("Type mismatch (" + _leftType + ", " + _rightType + ")");
-				      }
+				      if (_isAtribuicao) {
+				          _rightType = id.getType();
+				          if (_leftType != _rightType) {
+				              throw new SemanticException("Type mismatch (" + _leftType + ", " + _rightType + ")");
+				          }
 
-				      if (id.getValue() != null) {
-				        _expression = new AttributionExpression(_identifier, id);
+				          if (id.getValue() != null) {
+				            _expression = new AttributionExpression(_identifier, id);
+				          } else {
+				              throw new SemanticException("Unassigned variable: " + idName);
+				          }
 				      } else {
-				          throw new SemanticException("Unassigned variable: " + idName);
+				        _expression = new VariableExpression(id);
 				      }
 				  
 				}

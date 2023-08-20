@@ -15,13 +15,16 @@ String brasil;
 gols=1;
 brasil="Brasil";
 nomeTime=brasil;
-if (1<2) {
+if (gols<2) {
 System.out.println("1 < 2");
 System.out.println("true");
 }
 else {
 System.out.println("1 < 2");
 System.out.println("false");
+}
+while(gols<2) {
+gols=3;
 }
 
 }

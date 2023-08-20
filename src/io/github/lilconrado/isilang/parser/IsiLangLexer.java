@@ -111,10 +111,12 @@ public class IsiLangLexer extends Lexer {
 	    private Type _leftType;
 	    private AbstractExpression _expression;
 	    private String _idAtribuido;
+	    private boolean _isAtribuicao;
 
 	    public void init() {
 	        program.setSymbolTable(_symbolTable);
 	        _stack.push(new ArrayList<AbstractCommand>());
+	        _isAtribuicao = false;
 	    }
 
 	    public void exibirIds(){
