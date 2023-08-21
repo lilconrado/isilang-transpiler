@@ -692,6 +692,10 @@ public class IsiLangParser extends Parser {
 				        throw new SemanticException("Variable " + idName + " not declared");
 				    }
 
+				    if (!id.isUsed()) {
+				        throw new SemanticException("Unassigned variable: " + idName);
+				    }
+
 				    CmdWrite write = new CmdWrite(id);
 				    _stack.peek().add(write);
 

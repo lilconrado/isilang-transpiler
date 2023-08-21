@@ -12,6 +12,7 @@ programa
     inteiro i.
 
     texto nome.
+    escreva(nome).
 
     //regiao perimetro
     escreva("Calculando o perimetro do triangulo").
