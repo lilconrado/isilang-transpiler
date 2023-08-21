@@ -8,10 +8,10 @@ antlr4 ./IsiLang.g4 -o src/io/github/lilconrado/isilang/parser -package io.githu
 | --  | -- |  --- |
 | 1  | Possui 2 tipos de variáveis | ☑️ |
 | 2  | Possui a estrutura If.. else | ☑️ |
-| 3  | Possui estrutura de controle while/do while | ❗ |
-| 4  | Operações Aritméticas executadas corretamente | ⬜️ |
+| 3  | Possui estrutura de controle while/do while | ☑️ |
+| 4  | Operações Aritméticas executadas corretamente | ☑️ |
 | 5  | Atribuições realizadas corretamente | ☑️️ |
-| 6  | Possui operações de Entrada e Saída | ❗ |
+| 6  | Possui operações de Entrada e Saída | ☑️ |
 | 7  | Aceita números decimais | ☑️ |
 | 8  | Verificar se a variável já foi previamente declarada | ☑️ |
 | 9  | Verificar se a variável foi declarada e não foi usada | ☑️️ |
@@ -23,6 +23,6 @@ antlr4 ./IsiLang.g4 -o src/io/github/lilconrado/isilang/parser -package io.githu
 | 1 | Editor Highlight (simulando uma pequena IDE) | 3 | ⬜️ |
 | 2 | Avaliador de expressões aritméticas  | 3         | ⬜️ |
 | 3 | Inserção de Operadores lógicos  | 2              | ⬜️ |
-| 4 | Geração de várias linguagens-alvo  | 3           | ⬜️ |
+| 4 | Geração de várias linguagens-alvo  | 3           | ☑️ |
 | 5 | Uma API Rest para implementação do compilado | 4 | ⬜️ |
 | 6 | Um Interpretador (runtime) para a linguagem  | 5 | ⬜️ |

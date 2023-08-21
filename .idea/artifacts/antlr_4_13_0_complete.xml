@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="antlr-4_13_0-complete">
+    <output-path>$PROJECT_DIR$/out/artifacts/antlr_4_13_0_complete</output-path>
+    <root id="root">
+      <element id="library" level="project" name="antlr-4.13.0-complete" />
+    </root>
+  </artifact>
+</component>
