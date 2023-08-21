@@ -26,6 +26,10 @@ grammar IsiLang;
     private String _idAtribuido;
     private boolean _isAtribuicao;
 
+    public void setLanguage(String nome){
+        program.setLanguage(nome);
+    }
+
     public void init() {
         program.setSymbolTable(_symbolTable);
         _stack.push(new ArrayList<AbstractCommand>());
@@ -125,6 +129,10 @@ cmdEscrita: 'escreva' AP (ID {
         throw new SemanticException("Variable " + idName + " not declared");
     }
 
+    if (!id.isUsed()) {
+        throw new SemanticException("Unassigned variable: " + idName);
+    }
+
     CmdWrite write = new CmdWrite(id);
     _stack.peek().add(write);
 } | TEXT {
@@ -159,6 +167,8 @@ cmdIf: 'se' {
     _stack.push(new ArrayList<AbstractCommand>());
     BinaryExpression _relExpr = new BinaryExpression();
     CmdIf _cmdIf = new CmdIf();
+
+    boolean hasElse = false;
 } AP expr {
     _relExpr.setLeft(_expression);
 } OP_REL {
@@ -170,9 +180,13 @@ cmdIf: 'se' {
 } FP AC bloco {
     _cmdIf.setListTrue(_stack.pop());
 } FC ('senao' AC {
+    hasElse = true;
     _stack.push(new ArrayList<AbstractCommand>());
 } bloco FC)? {
-    _cmdIf.setListFalse(_stack.pop());
+    if (hasElse) {
+        _cmdIf.setListFalse(_stack.pop());
+    }
+
     _stack.peek().add(_cmdIf);
 } ;
 
@@ -275,7 +289,7 @@ INTEGER: [0-9]+ ;
 
 REAL: [0-9]+ ('.' [0-9]+)? ;
 
-TEXT: '"' ([a-z]|[A-Z]|[0-9]|' '|'\t'|'!'|'-'|'='|'<'|'>')* '"';
+TEXT: '"' ([a-z]|[A-Z]|[0-9]|' '|'\t'|'!'|'-'|'='|'<'|'>'|'?'|':' |'\\' )* '"';
 
 BLANK: (' '| '\t' | '\n' | '\r') -> skip;
 

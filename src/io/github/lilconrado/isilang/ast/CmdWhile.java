@@ -8,8 +8,13 @@ public class CmdWhile extends AbstractCommand{
     private AbstractExpression expr;
     private List<AbstractCommand> listTrue;
 
-    private List<AbstractCommand> listFalse;
+    public AbstractExpression getExpr() {
+        return expr;
+    }
 
+    public List<AbstractCommand> getListTrue() {
+        return listTrue;
+    }
 
     public void setExpr(AbstractExpression expr) {
         this.expr = expr;
@@ -20,14 +25,5 @@ public class CmdWhile extends AbstractCommand{
     }
 
 
-    @Override
-    public String generateCode() {
-        StringBuilder sbTrue = new StringBuilder();
 
-        for (AbstractCommand cmd: listTrue) {
-            sbTrue.append(cmd.generateCode());
-        }
-
-        return String.format("while(%s) {\n%s}\n", expr.toString(), sbTrue.toString() );
-    }
 }

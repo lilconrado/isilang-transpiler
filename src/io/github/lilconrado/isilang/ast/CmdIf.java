@@ -19,28 +19,20 @@ public class CmdIf extends AbstractCommand {
         this.listFalse = listFalse;
     }
 
+    public AbstractExpression getExpr() {
+        return expr;
+    }
+
+    public List<AbstractCommand> getListTrue() {
+        return listTrue;
+    }
+
+    public List<AbstractCommand> getListFalse() {
+        return listFalse;
+    }
+
     private List<AbstractCommand> listTrue;
     private List<AbstractCommand> listFalse;
 
-    @Override
-    public String generateCode() {
-        StringBuilder sbTrue = new StringBuilder();
-        StringBuilder sbFalse = new StringBuilder();
 
-        for (AbstractCommand cmd: listTrue) {
-            sbTrue.append(cmd.generateCode());
-        }
-
-        if (!listFalse.isEmpty()) {
-            sbFalse.append("else {\n");
-
-            for (AbstractCommand cmd: listFalse) {
-                sbFalse.append(cmd.generateCode());
-            }
-
-            sbFalse.append("}\n");
-        }
-
-        return String.format("if (%s) {\n%s}\n%s", expr.toString(), sbTrue.toString(), sbFalse.toString());
-    }
 }
